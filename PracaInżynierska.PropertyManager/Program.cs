@@ -1,4 +1,5 @@
 
+using NSwag.AspNetCore;
 using PracaIn¿ynierska.Application.Interfaces;
 using PracaIn¿ynierska.Application.Mappings;
 using PracaIn¿ynierska.Application.Services;
@@ -20,6 +21,8 @@ builder.Services.AddSingleton(AutoMapperConfig.Initialize());
 builder.Services.AddControllersWithViews();
 
 
+builder.Services.AddSwaggerDocument();
+
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -27,9 +30,12 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
 
     app.UseHsts();
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    
+
 }
+app.UseOpenApi();
+app.UseSwaggerUi3();
+app.UseDeveloperExceptionPage();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles(new StaticFileOptions()
@@ -48,6 +54,9 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller}/{action=Index}/{id?}");
 
-app.MapFallbackToFile("index.html"); ;
-
+//app.MapFallbackToFile("index.html"); ;
+//app.MapWhen(r => !r.Request.Path.Value.StartsWith("/swagger"), builder2 =>
+//{
+//    app.MapFallbackToFile("index.html");
+//});
 app.Run();
