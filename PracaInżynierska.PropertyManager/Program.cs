@@ -1,7 +1,21 @@
 
+using PracaIn퓓nierska.Application.Interfaces;
+using PracaIn퓓nierska.Application.Mappings;
+using PracaIn퓓nierska.Application.Services;
+using PracaIn퓓nierska.Domain.IRepositories;
+using PracaIn퓓nierska.Infrastructure;
+using PracaIn퓓nierska.Infrastructure.Repositories;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+builder.Services.AddDbContext<PIDbContext>();
+builder.Services.AddScoped<IUserService, UserService>();
+
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+builder.Services.AddSingleton(AutoMapperConfig.Initialize());
 
 builder.Services.AddControllersWithViews();
 

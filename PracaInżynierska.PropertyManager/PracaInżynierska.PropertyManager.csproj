@@ -23,7 +23,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PracaInżynierska.Application\PracaInżynierska.Application.csproj" />
     <ProjectReference Include="..\PracaInżynierska.Domain\PracaInżynierska.Domain.csproj" />
+    <ProjectReference Include="..\PracaInżynierska.Infrastructure\PracaInżynierska.Infrastructure.csproj" />
   </ItemGroup>
 
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
