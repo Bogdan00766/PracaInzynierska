@@ -1,10 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿
+using Microsoft.EntityFrameworkCore;
 using PracaInżynierska.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 
 namespace PracaInżynierska.Infrastructure
 {
@@ -16,6 +18,12 @@ namespace PracaInżynierska.Infrastructure
         public DbSet<FinancialChange> FinancialChange { get; set; }
         public DbSet<Transfer> Transfer { get; set; }
 
+        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        //{
+        //    var sqliteConnectionInitializer = new SqliteCreateDatabaseIfNotExists<PIDbContext>(modelBuilder);
+        //    Database.SetInitializer(sqliteConnectionInitializer);
+        //}
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -23,5 +31,12 @@ namespace PracaInżynierska.Infrastructure
                 .UseSqlite("Data Source=PracaInz.db");
 
         }
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.Entity<FinancialChange>()
+        //        .HasOne(a => a.Transfer)
+        //        .WithOne(b => b.FinancialChange)
+        //        .HasForeignKey<Transfer>(c => c.FinancialChangeId);
+        //}
     }
 }

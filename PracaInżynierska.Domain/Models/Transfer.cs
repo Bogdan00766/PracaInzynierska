@@ -6,6 +6,7 @@
         public string SentFrom { get; set; }
         public string SentTo { get; set; }
         public string AccountNumber { get; set; }
-        public FinancialChange FinancialChange { get; set; }
+        //public int FinancialChangeId { get; set; }
+        //public List<FinancialChange>? FinancialChanges { get; set; }
     }
 }
