@@ -16,6 +16,10 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="4.8.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="NSwag.AspNetCore" Version="13.16.1" />
   </ItemGroup>
 
@@ -27,9 +31,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\Dto\RegisterDto.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\PracaInżynierska.Application\PracaInżynierska.Application.csproj" />
     <ProjectReference Include="..\PracaInżynierska.Domain\PracaInżynierska.Domain.csproj" />
     <ProjectReference Include="..\PracaInżynierska.Infrastructure\PracaInżynierska.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\Dto\RegisterDto.ts" />
   </ItemGroup>
 
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
