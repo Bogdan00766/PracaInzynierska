@@ -1,0 +1,16 @@
+.main{
+    margin-left:1%;
+}
+
+.labels{
+    margin-left: 2px;
+    margin-bottom:5px;
+}
+.form-control{
+    /*max-width:30%;*/
+    margin-top:0px;
+}
+.login-btn{
+    margin-top:5px;
+    /*width:30%;*/
+}
