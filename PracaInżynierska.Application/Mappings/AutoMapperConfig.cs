@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using PracaInżynierska.Application.Dto;
+using PracaInżynierska.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +14,8 @@ namespace PracaInżynierska.Application.Mappings
         public static IMapper Initialize()
            => new MapperConfiguration(cfg =>
            {
-               
-               
+               cfg.CreateMap<UserDto, User>();
+               cfg.CreateMap<User, UserDto>();
            })
            .CreateMapper();
     }

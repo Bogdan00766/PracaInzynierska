@@ -1,37 +1,47 @@
 <div class="container main">
   <div class="row">
-    <div class="col form-group">
+    <form class="col form-group">
       <h1>Rejestracja</h1>
       <label class="labels">Nazwa użytkownika</label>
-      <input type="text" class="form-control" id="name,"
+      <input type="text" class="form-control" id="name"
              required
              [(ngModel)]="registerModel.name" name="name" placeholder="Nazwa użytkownika" />
-      <label class="labels">Email</label>
-      <input type="text" class="form-control form-element" id="email"
-             required
-             [(ngModel)]="registerModel.email" name="email" placeholder="Email" />
-      <label class="labels">Hasło</label>
-      <input type="password" class="form-control" id="password"
-             required
-             [(ngModel)]="registerModel.password" name="password" placeholder="Hasło" />
-      <button type="button" class="btn btn-primary login-btn">Zarejestruj</button>
-    </div>
 
-    <div class="col form-group">
-      <h1>Logowanie</h1>
-      <label class="labels">Nazwa użytkownika</label>
-      <input type="text" class="form-control" id="name,"
-             required
-             [(ngModel)]="registerModel.name" name="name" placeholder="Nazwa użytkownika" />
+
       <label class="labels">Email</label>
+
       <input type="text" class="form-control form-element" id="email"
              required
-             [(ngModel)]="registerModel.email" name="email" placeholder="Email" />
+             [(ngModel)]="registerModel.email" name="email" placeholder="Email" #email="ngModel" />
       <label class="labels">Hasło</label>
       <input type="password" class="form-control" id="password"
              required
              [(ngModel)]="registerModel.password" name="password" placeholder="Hasło" />
-      <button type="button" class="btn btn-primary login-btn">Zarejestruj</button>
+      <button (click)="onRegisterBtnClick()" class="btn btn-primary login-btn">Zarejestruj</button>
+
+      <div class="alert">
+        <div *ngIf="email.errors?.['required']">
+          Email jest wymagany
+        </div>
+      </div>
+
+    </form>
+
+      <div class="col form-group">
+        <h1>Logowanie</h1>
+        <label class="labels">Nazwa użytkownika</label>
+        <input type="text" class="form-control" id="name,"
+               required
+               [(ngModel)]="registerModel.name" name="name" placeholder="Nazwa użytkownika" />
+        <label class="labels">Email</label>
+        <input type="text" class="form-control form-element" id="email"
+               required
+               [(ngModel)]="registerModel.email" name="email" placeholder="Email" />
+        <label class="labels">Hasło</label>
+        <input type="password" class="form-control" id="password"
+               required
+               [(ngModel)]="registerModel.password" name="password" placeholder="Hasło" />
+        <button type="button" class="btn btn-primary login-btn">Zarejestruj</button>
+      </div>
     </div>
-  </div>
 </div>

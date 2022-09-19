@@ -13,4 +13,9 @@
   <ItemGroup>
     <Folder Include="src\app\shared\Dtos\" />
   </ItemGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>
