@@ -39,15 +39,15 @@ export class RegisterComponent implements OnInit {
       },
       (error) => {
         if (error["error"] == "Email is already in use") {
-          this.alertMessage = "Istnieje konto o podanym adresie eMail";
+          this.alertMessage = "Istnieje już konto o podanym adresie eMail";
         }
       }
     )
   }
 }
+
 interface RegisterResponse {
   id: number;
   name: string;
-  lastName: string;
   eMail: string;
 }

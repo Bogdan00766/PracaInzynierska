@@ -26,7 +26,7 @@ namespace PracaInżynierska.PropertyManager.Controllers
             UserDto newUser;
             try
             {
-                newUser = _userService.Register(rud.Name, rud.LastName, rud.Password, rud.EMail);
+                newUser = _userService.Register(rud.Name, rud.Password, rud.EMail);
             }
             catch (Exception e)
             {

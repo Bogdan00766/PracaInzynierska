@@ -77,10 +77,9 @@ namespace PracaInżynierska.Application.Services
             _userRepository.SaveAsync();
         }
 
-        public UserDto Register(string name, string lastName, string password, string email)
+        public UserDto Register(string name, string password, string email)
         {
             if (name == null) throw new Exception("Name cannot be null");
-            if (lastName == null) throw new Exception("Last Name cannot be null");
             if (password == null) throw new Exception("Password, cannot be null");
             if (email == null) throw new Exception("Email cannot be null");
 
@@ -96,7 +95,6 @@ namespace PracaInżynierska.Application.Services
             User user = new User()
             {
                 Name = name,
-                LastName = lastName,
                 Password = hash,
                 EMail = email,
             };

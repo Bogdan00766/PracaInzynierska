@@ -11,7 +11,7 @@ namespace PracaInżynierska.Application.Interfaces
     {
         UserDto Login(string username, string password);
         void Logout(Guid guid);
-        UserDto Register(string name, string lastName, string password, string email);
+        UserDto Register(string name, string password, string email);
         void SetGuid(Guid id, int userId);
         bool IsLogged(Guid guid);
         UserDto FindByGuid(Guid guid);

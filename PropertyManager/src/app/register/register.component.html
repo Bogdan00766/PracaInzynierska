@@ -19,19 +19,15 @@
              [(ngModel)]="registerModel.password" name="password" placeholder="Hasło" />
 
       <div class="alert">
-        <div>
+        <div *ngIf="email.errors?.['required']">
+          Email jest wymagany
+        </div>
+        <div *ngIf="alertMessage.length > 1">
           <h6>{{alertMessage}}</h6>
         </div>
       </div>
 
       <button (click)="onRegisterBtnClick()" class="btn btn-primary login-btn">Zarejestruj</button>
-
-
-      <div class="alert">
-        <div *ngIf="email.errors?.['required']">
-          Email jest wymagany
-        </div>
-      </div>
 
     </form>
 
