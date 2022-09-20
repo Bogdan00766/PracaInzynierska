@@ -31,12 +31,12 @@ namespace PracaInżynierska.Infrastructure
                 .UseSqlite("Data Source=PracaInz.db");
 
         }
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    modelBuilder.Entity<FinancialChange>()
-        //        .HasOne(a => a.Transfer)
-        //        .WithOne(b => b.FinancialChange)
-        //        .HasForeignKey<Transfer>(c => c.FinancialChangeId);
-        //}
+        
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>()
+                .HasIndex(u => u.EMail)
+                .IsUnique();
+        }
     }
 }

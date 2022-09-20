@@ -17,7 +17,15 @@
       <input type="password" class="form-control" id="password"
              required
              [(ngModel)]="registerModel.password" name="password" placeholder="Hasło" />
+
+      <div class="alert">
+        <div>
+          <h6>{{alertMessage}}</h6>
+        </div>
+      </div>
+
       <button (click)="onRegisterBtnClick()" class="btn btn-primary login-btn">Zarejestruj</button>
+
 
       <div class="alert">
         <div *ngIf="email.errors?.['required']">

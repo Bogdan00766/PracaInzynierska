@@ -13,5 +13,6 @@ namespace PracaInżynierska.Domain.IRepositories
         bool CheckPassword(string email, byte[] hash);
         void SetGuid(Guid id, int userId);
         User? FindUserByGUID(Guid guid);
+        bool IsEmailFree(string email);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using PracaInżynierska.Domain.IRepositories;
 using PracaInżynierska.Domain.Models;
 using System;
@@ -12,11 +13,11 @@ namespace PracaInżynierska.Infrastructure.Repositories
     public class Repository<T> : IRepository<T> where T : Entity
     {
         protected readonly PIDbContext _dbContext;
+
         public Repository(PIDbContext dbContext)
         {
             _dbContext = dbContext;
         }
-
         public T Create(T e)
         {
             _dbContext.Add(e);

@@ -15,6 +15,7 @@ export class RegisterComponent implements OnInit {
 
   registerModel2 = new RegisterDto();
   http: HttpClient;
+  alertMessage: string = "";
   
   constructor(http: HttpClient) {
     this.http = http;
@@ -25,19 +26,23 @@ export class RegisterComponent implements OnInit {
   }
 
   onRegisterBtnClick() {
-    this.registerModel2.email = "test1@test.com";
-    this.registerModel2.name = "test1";
+    this.alertMessage = "";
+    this.registerModel2.email = "test2@test.com";
+    this.registerModel2.name = "test2";
     this.registerModel2.password = "test1";
     this.registerModel2.lastName = "xd"
-    const headers = new HttpHeaders()
-      .set('content-type', 'application/json')
-      .set('Access-Control-Allow-Origin', '*');
-    //let headers = new HttpHeaders();
-    this.http.post<RegisterResponse>('/api/Register', this.registerModel2, { 'headers': headers }).subscribe(response => {
-      console.log(response);
-      this.registerModel.email = response.eMail;
-      this.registerModel.name = response.name;
-    })
+
+    this.http.post<RegisterResponse>('/api/Register', this.registerModel2).subscribe(
+      (response) => {
+        console.log(response);
+        //TODO
+      },
+      (error) => {
+        if (error["error"] == "Email is already in use") {
+          this.alertMessage = "Istnieje konto o podanym adresie eMail";
+        }
+      }
+    )
   }
 }
 interface RegisterResponse {

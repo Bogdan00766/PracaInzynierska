@@ -1,4 +1,5 @@
-﻿using PracaInżynierska.Domain.IRepositories;
+﻿using Microsoft.Extensions.Logging;
+using PracaInżynierska.Domain.IRepositories;
 using PracaInżynierska.Domain.Models;
 using System;
 using System.Collections.Generic;
@@ -61,6 +62,13 @@ namespace PracaInżynierska.Infrastructure.Repositories
             var user = _dbContext.User.Where(x => x.AutoLoginGUID == guid.ToString()).FirstOrDefault();
             if (user != null && user.AutoLoginGUIDExpires >= DateTime.Now.AddDays(1)) return null;
             return user;
+        }
+
+        public bool IsEmailFree(string email)
+        {
+            User? user =_dbContext.User.Where(x => x.EMail == email).FirstOrDefault();
+            if (user == null) return true;
+            return false;
         }
     }
 }

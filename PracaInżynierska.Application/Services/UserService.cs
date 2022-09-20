@@ -84,6 +84,8 @@ namespace PracaInżynierska.Application.Services
             if (password == null) throw new Exception("Password, cannot be null");
             if (email == null) throw new Exception("Email cannot be null");
 
+            if(!_userRepository.IsEmailFree(email)) throw new Exception("Email is already in use");
+
             password = email + password;
 
             byte[] hash;

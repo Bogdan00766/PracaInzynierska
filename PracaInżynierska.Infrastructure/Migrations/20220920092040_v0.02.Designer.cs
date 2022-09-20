@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PracaInżynierska.Infrastructure;
 
@@ -10,9 +11,10 @@ using PracaInżynierska.Infrastructure;
 namespace PracaInżynierska.Infrastructure.Migrations
 {
     [DbContext(typeof(PIDbContext))]
-    partial class PIDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220920092040_v0.02")]
+    partial class v002
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.9");
