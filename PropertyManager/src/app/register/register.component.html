@@ -22,8 +22,8 @@
         <div *ngIf="email.errors?.['required']">
           Email jest wymagany
         </div>
-        <div *ngIf="alertMessage.length > 1">
-          <h6>{{alertMessage}}</h6>
+        <div *ngIf="registerAlertMessage.length > 1">
+          <h6>{{registerAlertMessage}}</h6>
         </div>
       </div>
 
@@ -31,21 +31,20 @@
 
     </form>
 
-      <div class="col form-group">
-        <h1>Logowanie</h1>
-        <label class="labels">Nazwa użytkownika</label>
-        <input type="text" class="form-control" id="name,"
-               required
-               [(ngModel)]="registerModel.name" name="name" placeholder="Nazwa użytkownika" />
-        <label class="labels">Email</label>
-        <input type="text" class="form-control form-element" id="email"
-               required
-               [(ngModel)]="registerModel.email" name="email" placeholder="Email" />
-        <label class="labels">Hasło</label>
-        <input type="password" class="form-control" id="password"
-               required
-               [(ngModel)]="registerModel.password" name="password" placeholder="Hasło" />
-        <button type="button" class="btn btn-primary login-btn">Zarejestruj</button>
+    <div class="col form-group">
+      <h1>Logowanie</h1>
+      <label class="labels">Email</label>
+      <input type="text" class="form-control form-element" id="loginEmail"
+             required
+             [(ngModel)]="loginModel.email" name="email" placeholder="Email" />
+      <label class="labels">Hasło</label>
+      <input type="password" class="form-control" id="loginPassword"
+             required
+             [(ngModel)]="loginModel.password" name="password" placeholder="Hasło" />
+      <div *ngIf="loginAlertMessage.length > 1">
+        <h6>{{loginAlertMessage}}</h6>
       </div>
+      <button (click)="onLoginBtnClick()" type="button" class="btn btn-primary login-btn">Zaloguj</button>
+    </div>
     </div>
 </div>

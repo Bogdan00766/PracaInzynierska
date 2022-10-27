@@ -1,7 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { CurrentUser } from '../shared/CurrentUser';
 import { contains } from '../shared/CustomValidators';
+import { LoginDto } from '../shared/Dtos/LoginDto';
 import { RegisterDto } from '../shared/Dtos/RegisterDto';
 
 
@@ -11,11 +13,13 @@ import { RegisterDto } from '../shared/Dtos/RegisterDto';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  registerModel = new RegisterDto();
 
-  registerModel2 = new RegisterDto();
+  registerModel = new RegisterDto();
+  loginModel = new LoginDto();
+
   http: HttpClient;
-  alertMessage: string = "";
+  registerAlertMessage: string = "";
+  loginAlertMessage: string = "";
   
   constructor(http: HttpClient) {
     this.http = http;
@@ -25,21 +29,43 @@ export class RegisterComponent implements OnInit {
     
   }
 
-  onRegisterBtnClick() {
-    this.alertMessage = "";
-    this.registerModel2.email = "test2@test.com";
-    this.registerModel2.name = "test2";
-    this.registerModel2.password = "test1";
-    this.registerModel2.lastName = "xd"
 
-    this.http.post<RegisterResponse>('/api/Register', this.registerModel2).subscribe(
+
+  onRegisterBtnClick() {
+    this.registerAlertMessage = "";
+    
+    this.http.post<RegisterResponse>('/api/Register', this.registerModel).subscribe(
       (response) => {
-        console.log(response);
-        //TODO
+        this.registerAlertMessage = "Rejestracja pomyślna. Teraz możesz się zalogować."
+        this.registerModel.email = "";
+        this.registerModel.name = "";
+        this.registerModel.password = "";
       },
       (error) => {
+        console.log(error)
         if (error["error"] == "Email is already in use") {
-          this.alertMessage = "Istnieje już konto o podanym adresie eMail";
+          this.registerAlertMessage = "Istnieje już konto o podanym adresie eMail";
+        }
+      }
+    )
+  }
+
+  onLoginBtnClick() {
+    this.loginAlertMessage = "";
+
+    this.http.post<LoginResponse>('/api/Login', this.loginModel).subscribe(
+      (response) => {
+        CurrentUser.id = response.id;
+        CurrentUser.userName = response.name;
+        CurrentUser.email = response.eMail;
+      },
+      (error) => {
+        console.log(error)
+        if (error["error"] == "User not found") {
+          this.loginAlertMessage = "Nie znaleziono użytkownika o podanym adresie email";
+        }
+        if (error["error"] == "Wrong password") {
+          this.loginAlertMessage = "Błędne hasło";
         }
       }
     )
@@ -47,6 +73,12 @@ export class RegisterComponent implements OnInit {
 }
 
 interface RegisterResponse {
+  id: number;
+  name: string;
+  eMail: string;
+}
+
+interface LoginResponse {
   id: number;
   name: string;
   eMail: string;
