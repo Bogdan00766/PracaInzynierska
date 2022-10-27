@@ -6,6 +6,7 @@ import { RegisterComponent } from './register/register.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AppConfigService } from './app-config.service';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { AppConfigService } from './app-config.service';
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    RouterModule,
   ],
   providers: [
     {
