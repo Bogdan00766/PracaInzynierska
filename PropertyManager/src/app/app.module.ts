@@ -7,6 +7,7 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AppConfigService } from './app-config.service';
 import { RouterModule } from '@angular/router';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import { RouterModule } from '@angular/router';
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    RouterModule,
+    AppRoutingModule,
   ],
   providers: [
     {

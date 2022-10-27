@@ -10,6 +10,5 @@
     "src/polyfills.ts"
   ],
   "include": [
-    "src/app/app-routing.module.ts"
   ]
 }
