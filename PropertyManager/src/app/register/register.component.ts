@@ -36,6 +36,7 @@ export class RegisterComponent implements OnInit {
     
     this.http.post<RegisterResponse>('/api/Register', this.registerModel).subscribe(
       (response) => {
+        console.log(response);
         this.registerAlertMessage = "Rejestracja pomyślna. Teraz możesz się zalogować."
         this.registerModel.email = "";
         this.registerModel.name = "";
@@ -55,6 +56,7 @@ export class RegisterComponent implements OnInit {
 
     this.http.post<LoginResponse>('/api/Login', this.loginModel).subscribe(
       (response) => {
+        console.log(response);
         CurrentUser.id = response.id;
         CurrentUser.userName = response.name;
         CurrentUser.email = response.eMail;

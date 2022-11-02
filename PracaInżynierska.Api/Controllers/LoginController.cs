@@ -60,7 +60,7 @@ namespace PracaInżynierska.PropertyManager.Controllers
             _userService.SetGuid(guid, user.Id);
             HttpContext.Response.Cookies.Append("GUID", guid.ToString(), new Microsoft.AspNetCore.Http.CookieOptions
             {
-                Expires = DateTime.Now.AddDays(1),
+                Expires = DateTime.Now.AddSeconds(10),
             });
 
             return Ok(user);
@@ -71,6 +71,10 @@ namespace PracaInżynierska.PropertyManager.Controllers
         {
             var guidString = Request.Cookies["GUID"];
             Guid guid;
+            if(guidString == null)
+            {
+                return Unauthorized();
+            }
             try
             {
                 guid = Guid.Parse(guidString);
@@ -82,8 +86,9 @@ namespace PracaInżynierska.PropertyManager.Controllers
             }
             try
             {
+                _logger.LogDebug($"Wylogowano {guidString}");
                 _userService.Logout(guid);
-                return Ok("User logged out sucessfully");
+                return Ok();
             }
             catch (Exception e)
             {
