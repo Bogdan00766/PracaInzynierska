@@ -22,7 +22,7 @@ export class LogoutComponent implements OnInit {
     this.message = "";
     this.http.get('/api/Logout').subscribe(
       (response) => {
-        console.log(response);
+        console.log("Wylogowano");
         CurrentUser.id = -1;
         CurrentUser.email = "";
         CurrentUser.userName = "";

@@ -60,7 +60,7 @@ namespace PracaInżynierska.PropertyManager.Controllers
             _userService.SetGuid(guid, user.Id);
             HttpContext.Response.Cookies.Append("GUID", guid.ToString(), new Microsoft.AspNetCore.Http.CookieOptions
             {
-                Expires = DateTime.Now.AddSeconds(10),
+                Expires = DateTime.Now.AddMinutes(30),
             });
 
             return Ok(user);
