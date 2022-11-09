@@ -1,0 +1,49 @@
+<div class="container main">
+  <div class="row">
+    <form class="col-2 form-group">
+      <label class="labels">Nazwa nowej kategorii</label>
+      <input type="text" class="form-control" id="newCategoryInput"
+             required
+             [(ngModel)]="newCategory" name="newCategory" placeholder="Nazwa kategorii" />
+      <button (click)="onAddCategoryBtnClick()" class="btn btn-primary">Dodaj kategorię</button>
+    </form>
+
+    <form class="col-2 form-group">
+      <label class="labels">Nazwa nowego typu</label>
+      <input type="text" class="form-control" id="newTypeInput"
+             required
+             [(ngModel)]="newType" name="newType" placeholder="Nazwa typu" />
+      <button (click)="onAddTypeBtnClick()" class="btn btn-primary">Dodaj typ</button>
+    </form>
+  </div>
+  <p></p>
+  <div class="row">
+  </div>
+  <form class="row form-group">
+    <input type="text" class="col form-control" id="fcNameInput"
+           required
+           [(ngModel)]="newFinancialChange.name" name="name" placeholder="Nazwa" />
+
+    <input type="text" class="col form-control" id="fcValueInput"
+           required
+           [(ngModel)]="newFinancialChange.value" name="value" placeholder="Wartość" />
+
+    <input type="text" class="col form-control" id="fcSentFromInput"
+           required
+           [(ngModel)]="newFinancialChange.sentFrom" name="sentFrom" placeholder="Nadawca" />
+
+    <input type="text" class="col form-control" id="fcSentToInput"
+           required
+           [(ngModel)]="newFinancialChange.sentTo" name="sentTo" placeholder="Odbiorca" />
+
+    <select class="col form-select" aria-label="Default select example" 
+            required
+            [(ngModel)]="newFinancialChange.category">
+      <option selected disabled>Wybierz kategorie...</option>
+      <option *ngFor="let category of categories" [value]="category.name">
+        {{category.name}}
+      </option>
+    </select>
+
+  </form>
+</div>
