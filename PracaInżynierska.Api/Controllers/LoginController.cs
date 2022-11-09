@@ -11,9 +11,9 @@ namespace PracaInżynierska.PropertyManager.Controllers
     public class LoginController : Controller
     {
         private readonly IUserService _userService;
-        private readonly ILogger<User> _logger;
+        private readonly ILogger<LoginController> _logger;
 
-        public LoginController(IUserService userService, ILogger<User> logger)
+        public LoginController(IUserService userService, ILogger<LoginController> logger)
         {
             _userService = userService;
             _logger = logger;

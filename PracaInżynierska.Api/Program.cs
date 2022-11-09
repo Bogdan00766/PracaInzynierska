@@ -9,8 +9,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<PIDbContext>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
 builder.Services.AddSingleton(AutoMapperConfig.Initialize());
 

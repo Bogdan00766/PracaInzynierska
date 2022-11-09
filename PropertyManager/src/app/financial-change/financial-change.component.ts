@@ -21,7 +21,19 @@ export class FinancialChangeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getCategories();
+  }
 
+  getCategories(): void {
+    this.http.get<category[]>('/api/categories').subscribe(
+      (response) => {
+        console.log(response);
+        this.categories = response;
+      },
+      (error) => {
+        console.log(error)
+      }
+    )
   }
 
   onAddCategoryBtnClick() {
