@@ -2,6 +2,7 @@
 using PracaInżynierska.Application.Dto;
 using PracaInżynierska.Application.Interfaces;
 using PracaInżynierska.Domain.IRepositories;
+using PracaInżynierska.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,14 @@ namespace PracaInżynierska.Application.Services
         {
             _categoryRepository = categoryRepository;
             _mapper = mapper;
+        }
+
+        public Category AddCategory(string name)
+        {
+            Category category = new Category{ Name = name, };
+            var cat = _categoryRepository.Create(category);
+            if (cat == null) return new Category { Name = "AlreadyExist" };
+            return cat;
         }
 
         public async Task<List<CategoryDto>> GetAllCategoriesAsync()

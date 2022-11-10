@@ -13,7 +13,7 @@ export class FinancialChangeComponent implements OnInit {
   newCategory: string = "";
   newType: string = "";
   newFinancialChange: AddFinancialChangeDto = new AddFinancialChangeDto();
-
+  cat: category = { name : "" }; 
   categories: category[] = [];
 
   constructor(http: HttpClient) {
@@ -37,7 +37,17 @@ export class FinancialChangeComponent implements OnInit {
   }
 
   onAddCategoryBtnClick() {
-
+    this.cat.name = this.newCategory;
+    this.http.post('/api/categories', this.cat).subscribe(
+      (response) => {
+        console.log(response);
+        this.getCategories();
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
+    this.cat.name = "";
   }
 
   onAddTypeBtnClick() {

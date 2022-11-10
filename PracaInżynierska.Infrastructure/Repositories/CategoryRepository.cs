@@ -14,5 +14,14 @@ namespace PracaInżynierska.Infrastructure.Repositories
         {
         }
 
+        public Category? Create(Category c)
+        {
+            var cat =_dbContext.Category.Where(x => x.Name == c.Name).FirstOrDefault();
+            if (cat != null) return null;
+            _dbContext.Category.Add(c);
+            _dbContext.SaveChanges();
+            return c;
+        }
+
     }
 }
