@@ -9,6 +9,5 @@ namespace PracaInżynierska.Domain.Models
     public class AssetType : Entity
     {
         public string Name { get; set; }
-        public string  Description { get; set; }
     }
 }

@@ -18,6 +18,7 @@ export class FinancialChangeComponent implements OnInit {
   cat: category = { name : "" }; 
   categories: category[] = [];
   assets: assetType[] = [];
+  asset: assetType = { name: "" };
 
   constructor(http: HttpClient, router: Router) {
     this.http = http;
@@ -26,6 +27,7 @@ export class FinancialChangeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCategories();
+    this.getAssets();
   }
 
   getCategories(): void {
@@ -41,10 +43,10 @@ export class FinancialChangeComponent implements OnInit {
   }
 
   getAssets(): void {
-    this.http.get<category[]>('/api/categories').subscribe(
+    this.http.get<assetType[]>('/api/assettypes').subscribe(
       (response) => {
         console.log(response);
-        this.categories = response;
+        this.assets = response;
       },
       (error) => {
         console.log(error)
@@ -68,7 +70,18 @@ export class FinancialChangeComponent implements OnInit {
   }
 
   onAddTypeBtnClick() {
-
+    this.asset.name = this.newType;
+    this.http.post('/api/assettypes', this.asset).subscribe(
+      (response) => {
+        console.log(response);
+        this.getAssets();
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
+    this.asset.name = "";
+    this.newType = "";
   }
 }
 interface category{
