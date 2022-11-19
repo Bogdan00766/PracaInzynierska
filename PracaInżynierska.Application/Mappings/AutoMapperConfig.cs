@@ -18,6 +18,7 @@ namespace PracaInżynierska.Application.Mappings
                cfg.CreateMap<User, UserDto>();
                cfg.CreateMap<Category, CategoryDto>();
                cfg.CreateMap<CategoryDto, Category>();
+               cfg.CreateMap<AssetType, AssetTypeDto>();
            })
            .CreateMapper();
     }

@@ -37,7 +37,7 @@ namespace PracaInżynierska.Api.Controllers
         {
             var cat = _categoryService.AddCategory(dto.Name);
             if (cat.Name == "AlreadyExist") return Conflict("Category already exist");
-            else if (cat != null) return Ok(cat.Name);
+            else if (cat != null) return Ok();
             return BadRequest();
         }
     }

@@ -36,12 +36,21 @@
            required
            [(ngModel)]="newFinancialChange.sentTo" name="sentTo" placeholder="Odbiorca" />
 
-    <select class="col form-select" aria-label="Default select example" 
+    <select class="col form-select"
             required
             [(ngModel)]="newFinancialChange.category">
       <option selected disabled>Wybierz kategorie...</option>
       <option *ngFor="let category of categories" [value]="category.name">
         {{category.name}}
+      </option>
+    </select>
+
+    <select class="col form-select"
+            required
+            [(ngModel)]="newFinancialChange.assetType">
+      <option selected disabled>Wybierz rodzaj...</option>
+      <option *ngFor="let assetType of assets" [value]="assetType.name">
+        {{assetType.name}}
       </option>
     </select>
 
