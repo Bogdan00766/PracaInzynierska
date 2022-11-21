@@ -19,6 +19,7 @@ export class FinancialChangeComponent implements OnInit {
   categories: category[] = [];
   assets: assetType[] = [];
   asset: assetType = { name: "" };
+  fchanges: financialChange[] = [];
 
   constructor(http: HttpClient, router: Router) {
     this.http = http;
@@ -28,6 +29,7 @@ export class FinancialChangeComponent implements OnInit {
   ngOnInit(): void {
     this.getCategories();
     this.getAssets();
+    this.getFinancialChanges();
   }
 
   getCategories(): void {
@@ -47,6 +49,18 @@ export class FinancialChangeComponent implements OnInit {
       (response) => {
         console.log(response);
         this.assets = response;
+      },
+      (error) => {
+        console.log(error)
+      }
+    )
+  }
+
+  getFinancialChanges(): void {
+    this.http.get<financialChange[]>('/api/financialchanges').subscribe(
+      (response) => {
+        console.log(response);
+        this.fchanges = response;
       },
       (error) => {
         console.log(error)
@@ -89,4 +103,13 @@ interface category{
 }
 interface assetType {
   name: string;
+}
+interface financialChange {
+  id: number;
+  name: string;
+  value: number;
+  sentFrom: string;
+  sentTo: string;
+  categoryName: string;
+  assetTypeName: string;
 }

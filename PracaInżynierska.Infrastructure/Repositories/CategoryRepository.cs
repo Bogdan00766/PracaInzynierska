@@ -23,5 +23,9 @@ namespace PracaInżynierska.Infrastructure.Repositories
             return c;
         }
 
+        public Category? FindByName(string categoryName)
+        {
+            return _dbContext.Category.Where(x => x.Name == categoryName).FirstOrDefault();
+        }
     }
 }

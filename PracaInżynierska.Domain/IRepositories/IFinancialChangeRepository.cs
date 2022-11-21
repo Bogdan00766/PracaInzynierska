@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace PracaInżynierska.Domain.IRepositories
 {
-    public interface IAssetTypeRepository : IRepository<AssetType>
+    public interface IFinancialChangeRepository : IRepository<FinancialChange>
     {
-        AssetType FindByName(string assetTypeName);
+        Task<List<FinancialChange>> FindForGuid(Guid guid);
     }
 }

@@ -11,23 +11,20 @@ using PracaInżynierska.Infrastructure;
 namespace PracaInżynierska.Infrastructure.Migrations
 {
     [DbContext(typeof(PIDbContext))]
-    [Migration("20220908103454_v0.1")]
-    partial class v01
+    [Migration("20221119163858_v0.21")]
+    partial class v021
     {
+        /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "6.0.8");
+            modelBuilder.HasAnnotation("ProductVersion", "7.0.0");
 
             modelBuilder.Entity("PracaInżynierska.Domain.Models.AssetType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -69,6 +66,9 @@ namespace PracaInżynierska.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("OwnerId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("SentFrom")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -80,9 +80,6 @@ namespace PracaInżynierska.Infrastructure.Migrations
                     b.Property<int?>("TransferId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<float>("Value")
                         .HasColumnType("REAL");
 
@@ -92,9 +89,9 @@ namespace PracaInżynierska.Infrastructure.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("TransferId");
+                    b.HasIndex("OwnerId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("TransferId");
 
                     b.ToTable("FinancialChange");
                 });
@@ -161,6 +158,9 @@ namespace PracaInżynierska.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("EMail")
+                        .IsUnique();
+
                     b.ToTable("User");
                 });
 
@@ -178,17 +178,21 @@ namespace PracaInżynierska.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("PracaInżynierska.Domain.Models.User", "Owner")
+                        .WithMany("FinancialChanges")
+                        .HasForeignKey("OwnerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("PracaInżynierska.Domain.Models.Transfer", "Transfer")
                         .WithMany()
                         .HasForeignKey("TransferId");
 
-                    b.HasOne("PracaInżynierska.Domain.Models.User", null)
-                        .WithMany("FinancialChanges")
-                        .HasForeignKey("UserId");
-
                     b.Navigation("AssetType");
 
                     b.Navigation("Category");
+
+                    b.Navigation("Owner");
 
                     b.Navigation("Transfer");
                 });

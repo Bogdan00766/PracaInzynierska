@@ -23,5 +23,10 @@ namespace PracaInżynierska.Infrastructure.Repositories
             _dbContext.SaveChanges();
             return at;
         }
+
+        public AssetType FindByName(string assetTypeName)
+        {
+            return _dbContext.AssetType.Where(x => x.Name == assetTypeName).FirstOrDefault();
+        }
     }
 }

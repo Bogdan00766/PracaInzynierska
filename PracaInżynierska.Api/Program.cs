@@ -11,10 +11,13 @@ builder.Services.AddDbContext<PIDbContext>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IAssetTypeService, AssetTypeService>();
+builder.Services.AddScoped<IFinancialChangeService, FinancialChangeService>();
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IAssetTypeRepository, AssetTypeRepository>();
+builder.Services.AddScoped<IFinancialChangeRepository, FinancialChangeRepository>();
+
 builder.Services.AddSingleton(AutoMapperConfig.Initialize());
 
 builder.Services.AddControllers();

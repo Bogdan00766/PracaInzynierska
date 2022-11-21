@@ -9,6 +9,6 @@ namespace PracaInżynierska.Domain.IRepositories
 {
     public interface ICategoryRepository : IRepository<Category>
     {
-
+        Category? FindByName(string categoryName);
     }
 }
