@@ -19,6 +19,7 @@
   <p></p>
   <div class="row">
   </div>
+  <h2>Nowa zmiana finansowa</h2>
   <form class="row form-group">
     <input type="text" class="col form-control" id="fcNameInput"
            required
@@ -36,24 +37,22 @@
            required
            [(ngModel)]="newFinancialChange.sentTo" name="sentTo" placeholder="Odbiorca" />
 
-    <select class="col form-select"
-            required
-            [(ngModel)]="newFinancialChange.category">
+    <select #categorySelection (change)="onCategoryChange(categorySelection.value)" class="col form-select"
+            required>
       <option selected disabled>Wybierz kategorie...</option>
       <option *ngFor="let category of categories" [value]="category.name">
         {{category.name}}
       </option>
     </select>
 
-    <select class="col form-select"
-            required
-            [(ngModel)]="newFinancialChange.assetType">
+    <select #atSelection (change)="onAssetTypeChange(atSelection.value)" class="col form-select"
+            required>
       <option selected disabled>Wybierz rodzaj...</option>
       <option *ngFor="let assetType of assets" [value]="assetType.name">
         {{assetType.name}}
       </option>
     </select>
-
+    <button (click)="onAddfChangeBtnClick()" class="btn btn-primary col-12">Dodaj zmianę finansową</button>
   </form>
 
   <h2>Moje zmiany finansowe</h2>

@@ -32,6 +32,13 @@ export class FinancialChangeComponent implements OnInit {
     this.getFinancialChanges();
   }
 
+  onAssetTypeChange(value: string) {
+    this.newFinancialChange.assetTypeName = value;
+  }
+  onCategoryChange(value: string) {
+    this.newFinancialChange.categoryName = value;
+  }
+
   getCategories(): void {
     this.http.get<category[]>('/api/categories').subscribe(
       (response) => {
@@ -97,7 +104,20 @@ export class FinancialChangeComponent implements OnInit {
     this.asset.name = "";
     this.newType = "";
   }
+
+  onAddfChangeBtnClick() {
+    this.http.post('/api/financialchanges', this.newFinancialChange).subscribe(
+      (response) => {
+        console.log(response);
+        this.getFinancialChanges();
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
+  }
 }
+
 interface category{
   name: string;
 }
