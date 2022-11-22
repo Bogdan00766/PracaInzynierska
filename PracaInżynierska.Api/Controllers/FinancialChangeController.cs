@@ -42,5 +42,11 @@ namespace PracaInżynierska.Api.Controllers
                 return BadRequest(e.Message);
             }
         }
+        [HttpDelete]
+        public async Task<IActionResult> Delete(int id)
+        {
+            if (await _fcService.DeleteAsync(id) == true) return Ok();
+            return BadRequest("Deleting error");
+        }
     }
 }

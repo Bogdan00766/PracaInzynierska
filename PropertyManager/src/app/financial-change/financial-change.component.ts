@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AddFinancialChangeDto } from '../shared/Dtos/addFinancialChangeDto';
@@ -20,6 +20,7 @@ export class FinancialChangeComponent implements OnInit {
   assets: assetType[] = [];
   asset: assetType = { name: "" };
   fchanges: financialChange[] = [];
+  canDelete: boolean = false;
 
   constructor(http: HttpClient, router: Router) {
     this.http = http;
@@ -31,7 +32,20 @@ export class FinancialChangeComponent implements OnInit {
     this.getAssets();
     this.getFinancialChanges();
   }
+  OnDeleteButtonClick(item: any) {
+    let httpParams = new HttpParams().set('id', item.id);
+    let options = { params: httpParams };
+    this.http.delete('/api/financialchanges/', options).subscribe(
+      (response) => {
+        console.log(response);
+        this.getFinancialChanges();
+      },
+      (error) => {
+        console.log(error)
+      }
+    )
 
+  }
   onAssetTypeChange(value: string) {
     this.newFinancialChange.assetTypeName = value;
   }

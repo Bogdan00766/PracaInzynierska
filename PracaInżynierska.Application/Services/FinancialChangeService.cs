@@ -43,6 +43,21 @@ namespace PracaInżynierska.Application.Services
             return fic;
         }
 
+        public async Task<bool> DeleteAsync(int id)
+        {
+            try
+            {
+                var fc = await _financialChangeRepository.FindByIdAsync(id);
+                _financialChangeRepository.Delete(fc);
+                _financialChangeRepository.SaveAsync();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         public async Task<List<FinancialChangeDto>> GetAllAsync(Guid guid)
         {
             return _mapper.Map<List<FinancialChangeDto>>(await _financialChangeRepository.FindForGuid(guid));

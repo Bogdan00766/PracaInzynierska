@@ -56,28 +56,32 @@
   </form>
 
   <h2>Moje zmiany finansowe</h2>
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Id</th>
-        <th scope="col">Nazwa</th>
-        <th scope="col">Wartość</th>
-        <th scope="col">Nadawca</th>
-        <th scope="col">Odbiorca</th>
-        <th scope="col">Nazwa kategorii</th>
-        <th scope="col">Nazwa typu</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let fc of fchanges">
-        <td>{{fc.id}}</td>
-        <td>{{fc.name}}</td>
-        <td>{{fc.value}}</td>
-        <td>{{fc.sentFrom}}</td>
-        <td>{{fc.sentTo}}</td>
-        <td>{{fc.categoryName}}</td>
-        <td>{{fc.assetTypeName}}</td>
-      </tr>
-    </tbody>
-  </table>
+  <input class="form-check-input" type="checkbox" [(ngModel)]="canDelete" />
+  <label class="form-check-label">Tryb usuwania</label>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Nazwa</th>
+          <th scope="col">Wartość</th>
+          <th scope="col">Nadawca</th>
+          <th scope="col">Odbiorca</th>
+          <th scope="col">Nazwa kategorii</th>
+          <th scope="col">Nazwa typu</th>
+          <th scope="col">Opcje</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let fc of fchanges">
+          <td>{{fc.id}}</td>
+          <td>{{fc.name}}</td>
+          <td>{{fc.value}}</td>
+          <td>{{fc.sentFrom}}</td>
+          <td>{{fc.sentTo}}</td>
+          <td>{{fc.categoryName}}</td>
+          <td>{{fc.assetTypeName}}</td>
+          <td><button [disabled]="!canDelete" class="btn btn-danger" (click)="OnDeleteButtonClick(fc)">usuń</button></td>
+        </tr>
+      </tbody>
+    </table>
 </div>

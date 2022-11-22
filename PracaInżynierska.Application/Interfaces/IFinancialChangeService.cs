@@ -12,5 +12,6 @@ namespace PracaInżynierska.Application.Interfaces
     {
         FinancialChange Add(FinancialChangeDto dto, Guid guid);
         Task<List<FinancialChangeDto>> GetAllAsync(Guid guid);
+        Task<bool> DeleteAsync(int id);
     }
 }
