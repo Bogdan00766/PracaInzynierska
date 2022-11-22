@@ -54,7 +54,7 @@ namespace PracaInżynierska.Infrastructure.Repositories
         {
             var user = _dbContext.User.Where(x => x.Id == userId).FirstOrDefault();
             user.AutoLoginGUID = id.ToString();
-            user.AutoLoginGUIDExpires = DateTime.Now.AddDays(1);
+            user.AutoLoginGUIDExpires = DateTime.Now.AddMinutes(30);
         }
 
         public User? FindUserByGUID(Guid guid)

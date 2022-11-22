@@ -5,8 +5,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PracaInżynierska.Infrastructure.Migrations
 {
-    public partial class Initial : Migration
+    /// <inheritdoc />
+    public partial class v021 : Migration
     {
+        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -15,8 +17,7 @@ namespace PracaInżynierska.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
-                    Description = table.Column<string>(type: "TEXT", nullable: false)
+                    Name = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -55,6 +56,28 @@ namespace PracaInżynierska.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Transfer",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    SentFrom = table.Column<string>(type: "TEXT", nullable: false),
+                    SentTo = table.Column<string>(type: "TEXT", nullable: false),
+                    AccountNumber = table.Column<string>(type: "TEXT", nullable: false),
+                    UserId = table.Column<int>(type: "INTEGER", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Transfer", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Transfer_User_UserId",
+                        column: x => x.UserId,
+                        principalTable: "User",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "FinancialChange",
                 columns: table => new
                 {
@@ -62,11 +85,12 @@ namespace PracaInżynierska.Infrastructure.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     Value = table.Column<float>(type: "REAL", nullable: false),
+                    TransferId = table.Column<int>(type: "INTEGER", nullable: true),
                     SentFrom = table.Column<string>(type: "TEXT", nullable: false),
                     SentTo = table.Column<string>(type: "TEXT", nullable: false),
                     CategoryId = table.Column<int>(type: "INTEGER", nullable: false),
                     AssetTypeId = table.Column<int>(type: "INTEGER", nullable: false),
-                    UserId = table.Column<int>(type: "INTEGER", nullable: true)
+                    OwnerId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -84,39 +108,16 @@ namespace PracaInżynierska.Infrastructure.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_FinancialChange_User_UserId",
-                        column: x => x.UserId,
-                        principalTable: "User",
+                        name: "FK_FinancialChange_Transfer_TransferId",
+                        column: x => x.TransferId,
+                        principalTable: "Transfer",
                         principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Transfer",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
-                    SentFrom = table.Column<string>(type: "TEXT", nullable: false),
-                    SentTo = table.Column<string>(type: "TEXT", nullable: false),
-                    AccountNumber = table.Column<string>(type: "TEXT", nullable: false),
-                    FinancialChangeId = table.Column<int>(type: "INTEGER", nullable: false),
-                    UserId = table.Column<int>(type: "INTEGER", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Transfer", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Transfer_FinancialChange_FinancialChangeId",
-                        column: x => x.FinancialChangeId,
-                        principalTable: "FinancialChange",
+                        name: "FK_FinancialChange_User_OwnerId",
+                        column: x => x.OwnerId,
+                        principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Transfer_User_UserId",
-                        column: x => x.UserId,
-                        principalTable: "User",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
@@ -130,27 +131,30 @@ namespace PracaInżynierska.Infrastructure.Migrations
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_FinancialChange_UserId",
+                name: "IX_FinancialChange_OwnerId",
                 table: "FinancialChange",
-                column: "UserId");
+                column: "OwnerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Transfer_FinancialChangeId",
-                table: "Transfer",
-                column: "FinancialChangeId",
-                unique: true);
+                name: "IX_FinancialChange_TransferId",
+                table: "FinancialChange",
+                column: "TransferId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Transfer_UserId",
                 table: "Transfer",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_User_EMail",
+                table: "User",
+                column: "EMail",
+                unique: true);
         }
 
+        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Transfer");
-
             migrationBuilder.DropTable(
                 name: "FinancialChange");
 
@@ -159,6 +163,9 @@ namespace PracaInżynierska.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "Category");
+
+            migrationBuilder.DropTable(
+                name: "Transfer");
 
             migrationBuilder.DropTable(
                 name: "User");

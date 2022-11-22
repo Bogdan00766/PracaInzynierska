@@ -4,8 +4,10 @@
 
 namespace PracaInżynierska.Infrastructure.Migrations
 {
-    public partial class v03 : Migration
+    /// <inheritdoc />
+    public partial class v022 : Migration
     {
+        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
@@ -13,6 +15,7 @@ namespace PracaInżynierska.Infrastructure.Migrations
                 table: "User");
         }
 
+        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(

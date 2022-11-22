@@ -1,0 +1,87 @@
+<div class="container main">
+  <div class="row">
+    <form class="col-2 form-group">
+      <label class="labels">Nazwa nowej kategorii</label>
+      <input type="text" class="form-control" id="newCategoryInput"
+             required
+             [(ngModel)]="newCategory" name="newCategory" placeholder="Nazwa kategorii" />
+      <button (click)="onAddCategoryBtnClick()" class="btn btn-primary">Dodaj kategorię</button>
+    </form>
+
+    <form class="col-2 form-group">
+      <label class="labels">Nazwa nowego typu</label>
+      <input type="text" class="form-control" id="newTypeInput"
+             required
+             [(ngModel)]="newType" name="newType" placeholder="Nazwa typu" />
+      <button (click)="onAddTypeBtnClick()" class="btn btn-primary">Dodaj typ</button>
+    </form>
+  </div>
+  <p></p>
+  <div class="row">
+  </div>
+  <h2>Nowa zmiana finansowa</h2>
+  <form class="row form-group">
+    <input type="text" class="col form-control" id="fcNameInput"
+           required
+           [(ngModel)]="newFinancialChange.name" name="name" placeholder="Nazwa" />
+
+    <input type="text" class="col form-control" id="fcValueInput"
+           required
+           [(ngModel)]="newFinancialChange.value" name="value" placeholder="Wartość" />
+
+    <input type="text" class="col form-control" id="fcSentFromInput"
+           required
+           [(ngModel)]="newFinancialChange.sentFrom" name="sentFrom" placeholder="Nadawca" />
+
+    <input type="text" class="col form-control" id="fcSentToInput"
+           required
+           [(ngModel)]="newFinancialChange.sentTo" name="sentTo" placeholder="Odbiorca" />
+
+    <select #categorySelection (change)="onCategoryChange(categorySelection.value)" class="col form-select"
+            required>
+      <option selected disabled>Wybierz kategorie...</option>
+      <option *ngFor="let category of categories" [value]="category.name">
+        {{category.name}}
+      </option>
+    </select>
+
+    <select #atSelection (change)="onAssetTypeChange(atSelection.value)" class="col form-select"
+            required>
+      <option selected disabled>Wybierz rodzaj...</option>
+      <option *ngFor="let assetType of assets" [value]="assetType.name">
+        {{assetType.name}}
+      </option>
+    </select>
+    <button (click)="onAddfChangeBtnClick()" class="btn btn-primary col-12">Dodaj zmianę finansową</button>
+  </form>
+
+  <h2>Moje zmiany finansowe</h2>
+  <input class="form-check-input" type="checkbox" [(ngModel)]="canDelete" />
+  <label class="form-check-label">Tryb usuwania</label>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Nazwa</th>
+          <th scope="col">Wartość</th>
+          <th scope="col">Nadawca</th>
+          <th scope="col">Odbiorca</th>
+          <th scope="col">Nazwa kategorii</th>
+          <th scope="col">Nazwa typu</th>
+          <th scope="col">Opcje</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let fc of fchanges">
+          <td>{{fc.id}}</td>
+          <td>{{fc.name}}</td>
+          <td>{{fc.value}}</td>
+          <td>{{fc.sentFrom}}</td>
+          <td>{{fc.sentTo}}</td>
+          <td>{{fc.categoryName}}</td>
+          <td>{{fc.assetTypeName}}</td>
+          <td><button [disabled]="!canDelete" class="btn btn-danger" (click)="OnDeleteButtonClick(fc)">usuń</button></td>
+        </tr>
+      </tbody>
+    </table>
+</div>

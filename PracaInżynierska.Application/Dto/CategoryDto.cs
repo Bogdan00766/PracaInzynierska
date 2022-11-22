@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PracaInżynierska.Domain.Models
+namespace PracaInżynierska.Application.Dto
 {
-    public class AssetType : Entity
+    public class CategoryDto
     {
         public string Name { get; set; }
     }

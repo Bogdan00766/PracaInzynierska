@@ -8,12 +8,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppConfigService } from './app-config.service';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
+import { LogoutComponent } from './logout/logout.component';
+import { FinancialChangeComponent } from './financial-change/financial-change.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegisterComponent,
-    NavMenuComponent
+    NavMenuComponent,
+    LogoutComponent,
+    FinancialChangeComponent
   ],
   imports: [
     BrowserModule,

@@ -9,5 +9,6 @@
         public string SentTo { get; set; }
         public Category Category { get; set; }
         public AssetType AssetType { get; set; }
+        public User Owner { get; set; }
     }
 }
