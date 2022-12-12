@@ -1,9 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
+  <PropertyGroup>  
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+	<GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,8 +17,18 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PracaInżynierska.Application\PracaInżynierska.Application.csproj" />
-    <ProjectReference Include="..\PracaInżynierska.Infrastructure\PracaInżynierska.Infrastructure.csproj" />
+    <ProjectReference Include="..\PracaInżynierska.Application\PracaInzynierska.Application.csproj" />
+    <ProjectReference Include="..\PracaInżynierska.Domain\PracaInzynierska.Domain.csproj" />
+    <ProjectReference Include="..\PracaInżynierska.Infrastructure\PracaInzynierska.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="PracaInz.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Properties\launchSettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

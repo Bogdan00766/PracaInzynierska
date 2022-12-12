@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
-using PracaInżynierska.Application.Dto;
-using PracaInżynierska.Application.Interfaces;
-using PracaInżynierska.Domain.Models;
+using PracaInzynierska.Application.Dto;
+using PracaInzynierska.Application.Interfaces;
+using PracaInzynierska.Domain.Models;
 
-namespace PracaInżynierska.PropertyManager.Controllers
+namespace PracaInzynierska.PropertyManager.Controllers
 {
     [ApiController]
     [Route("api")]

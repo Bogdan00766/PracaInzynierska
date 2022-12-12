@@ -1,11 +1,11 @@
-﻿using PracaInżynierska.Domain.Models;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PracaInżynierska.Application.Dto
+namespace PracaInzynierska.Application.Dto
 {
     public class FinancialChangeDto
     {
@@ -16,5 +16,6 @@ namespace PracaInżynierska.Application.Dto
         public string SentTo { get; set; }
         public string CategoryName { get; set; }
         public string AssetTypeName { get; set; }
+        public int ReductionId { get; set; }
     }
 }

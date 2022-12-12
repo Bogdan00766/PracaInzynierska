@@ -1,4 +1,4 @@
-namespace PracaInżynierska.Api
+namespace PracaInzynierska.Api
 {
     public class WeatherForecast
     {

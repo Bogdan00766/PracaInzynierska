@@ -1,11 +1,11 @@
-﻿using PracaInżynierska.Application.Dto;
+﻿using PracaInzynierska.Application.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PracaInżynierska.Application.Interfaces
+namespace PracaInzynierska.Application.Interfaces
 {
     public interface IUserService
     {

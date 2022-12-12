@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using PracaInżynierska.Application.Dto;
-using PracaInżynierska.Application.Interfaces;
-using PracaInżynierska.Domain.IRepositories;
-using PracaInżynierska.Domain.Models;
+using PracaInzynierska.Application.Dto;
+using PracaInzynierska.Application.Interfaces;
+using PracaInzynierska.Domain.IRepositories;
+using PracaInzynierska.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace PracaInżynierska.Application.Services
+namespace PracaInzynierska.Application.Services
 {
     public class FinancialChangeService : IFinancialChangeService
     {
@@ -43,6 +43,38 @@ namespace PracaInżynierska.Application.Services
             return fic;
         }
 
+        public async Task<bool> SetReduction(int id1, int id2)
+        {
+            var fc1 = await _financialChangeRepository.FindByIdAsync(id1);
+            var fc2 = await _financialChangeRepository.FindByIdAsync(id2);
+            if (fc1 != null && fc2 != null)
+            {
+                fc1.Reduction = fc2;
+                fc2.Reduction = fc1;
+                _financialChangeRepository.Update(fc1);
+                _financialChangeRepository.Update(fc2);
+                _financialChangeRepository.SaveAsync();
+                return true;
+            }
+            else throw new ArgumentException("Record not exist");
+        }
+
+        public async Task<bool> DeleteReduction(int id1, int id2)
+        {
+            var fc1 = await _financialChangeRepository.FindByIdAsync(id1);
+            var fc2 = await _financialChangeRepository.FindByIdAsync(id2);
+            if (fc1 != null && fc2 != null)
+            {
+                fc1.Reduction = null;
+                fc2.Reduction = null;
+                _financialChangeRepository.Update(fc1);
+                _financialChangeRepository.Update(fc2);
+                _financialChangeRepository.SaveAsync();
+                return true;
+            }
+            else throw new ArgumentException("Record not exist");
+        }
+
         public async Task<bool> DeleteAsync(int id)
         {
             try
@@ -57,6 +89,8 @@ namespace PracaInżynierska.Application.Services
                 return false;
             }
         }
+
+       
 
         public async Task<List<FinancialChangeDto>> GetAllAsync(Guid guid)
         {

@@ -9,7 +9,8 @@
 *.user
 *.userosscache
 *.sln.docstates
-
+*.zip
+*.7zip
 *.db
 *.db-shm
 *.db-wal

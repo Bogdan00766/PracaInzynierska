@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { CurrentUser } from '../shared/CurrentUser';
 import { contains } from '../shared/CustomValidators';
 import { LoginDto } from '../shared/Dtos/LoginDto';
@@ -17,12 +18,14 @@ export class RegisterComponent implements OnInit {
   registerModel = new RegisterDto();
   loginModel = new LoginDto();
 
+  router: Router;
   http: HttpClient;
   registerAlertMessage: string = "";
   loginAlertMessage: string = "";
-  
-  constructor(http: HttpClient) {
+
+  constructor(http: HttpClient, router: Router) {
     this.http = http;
+    this.router = router;
   }
 
   ngOnInit(): void {
@@ -60,6 +63,7 @@ export class RegisterComponent implements OnInit {
         CurrentUser.id = response.id;
         CurrentUser.userName = response.name;
         CurrentUser.email = response.eMail;
+        this.router.navigate(['financialchanges']);
       },
       (error) => {
         console.log(error)

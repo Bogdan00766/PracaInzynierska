@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PracaInżynierska.Domain.Models
+namespace PracaInzynierska.Domain.Models
 {
     public class Entity
     {

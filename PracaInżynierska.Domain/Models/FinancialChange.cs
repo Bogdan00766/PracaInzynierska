@@ -1,4 +1,4 @@
-﻿namespace PracaInżynierska.Domain.Models
+﻿namespace PracaInzynierska.Domain.Models
 {
     public class FinancialChange : Entity
     {
@@ -10,5 +10,6 @@
         public Category Category { get; set; }
         public AssetType AssetType { get; set; }
         public User Owner { get; set; }
+        public FinancialChange? Reduction { get; set; }
     }
 }

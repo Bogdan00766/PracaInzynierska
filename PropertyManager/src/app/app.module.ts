@@ -10,6 +10,7 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { LogoutComponent } from './logout/logout.component';
 import { FinancialChangeComponent } from './financial-change/financial-change.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { FinancialChangeComponent } from './financial-change/financial-change.co
     RegisterComponent,
     NavMenuComponent,
     LogoutComponent,
-    FinancialChangeComponent
+    FinancialChangeComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

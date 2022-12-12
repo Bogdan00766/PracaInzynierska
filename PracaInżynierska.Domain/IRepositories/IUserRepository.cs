@@ -1,11 +1,11 @@
-﻿using PracaInżynierska.Domain.Models;
+﻿using PracaInzynierska.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PracaInżynierska.Domain.IRepositories
+namespace PracaInzynierska.Domain.IRepositories
 {
     public interface IUserRepository : IRepository<User>
     {
