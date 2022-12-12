@@ -10,12 +10,14 @@ namespace PracaInzynierska.Api.Controllers
     [Route("api/financialchanges")]
     public class FinancialChangeController : Controller
     {
+        private readonly ICategoryService _categoryService;
         private readonly IMachineLearning _machineLearning;
         private readonly ILogger<FinancialChangeController> _logger;
         private readonly IFinancialChangeService _fcService;
 
-        public FinancialChangeController(ILogger<FinancialChangeController> logger, IFinancialChangeService fcService, IMachineLearning ml)
+        public FinancialChangeController(ILogger<FinancialChangeController> logger, IFinancialChangeService fcService,ICategoryService categoryService ,IMachineLearning ml)
         {
+            _categoryService = categoryService;
             _machineLearning = ml;
             _logger = logger;
             _fcService = fcService;
@@ -47,15 +49,22 @@ namespace PracaInzynierska.Api.Controllers
             }
         }
         [HttpGet("suggestcategory")]
-        public IActionResult SuggestCategory(string name, float value)
+        public async Task<IActionResult> SuggestCategoryAsync(string name, float value)
         {
             MLFinancialChangeDto dto = new MLFinancialChangeDto() { Name = name, Value = value };
             var guidString = Request.Cookies["GUID"];
             Guid guid;
             try
             {
-                guid = Guid.Parse(guidString);
-                return Ok(_machineLearning.NaiveBayesPredict(dto));
+                //guid = Guid.Parse(guidString);
+                var categoryId = await _machineLearning.NaiveBayesPredict(dto);
+                var catName = await _categoryService.GetCategoryNameByIdAsync(categoryId);
+                CategoryDto cd = new CategoryDto()
+                {
+                    Name = catName
+                };
+
+                return Ok(cd);
             }
             catch (Exception e)
             {

@@ -25,7 +25,7 @@ export class FinancialChangeComponent implements OnInit {
   reductionId1: number = 0;
   reductionId2: number = 0;
   isIncome: boolean = true;
-
+  suggestedCategory: category = { name: "" }; 
 
   constructor(http: HttpClient, router: Router) {
     this.http = http;
@@ -37,6 +37,28 @@ export class FinancialChangeComponent implements OnInit {
     this.getAssets();
     this.getFinancialChanges();
   }
+
+  newFcNameValueChange() {
+    console.log("XD");
+    if (this.newFinancialChange.name != "" && this.newFinancialChange.value != 0) {
+
+      console.log("XD inside");
+      let httpParams = new HttpParams().set('name', this.newFinancialChange.name);
+      httpParams.set('value', this.newFinancialChange.value);
+      let options = { params: httpParams };
+      this.http.get<category>('/api/financialchanges/suggestcategory', options).subscribe(
+        (response) => {
+          this.suggestedCategory.name = response.name;
+          console.log(response);
+          console.log(this.suggestedCategory);
+        },
+        (error) => {
+          console.log(error)
+        }
+      )
+    }
+  }
+
   OnDeleteButtonClick(item: any) {
     let httpParams = new HttpParams().set('id', item.id);
     let options = { params: httpParams };
