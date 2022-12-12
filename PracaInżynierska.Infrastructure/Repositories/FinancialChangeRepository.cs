@@ -1,13 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PracaInżynierska.Domain.IRepositories;
-using PracaInżynierska.Domain.Models;
+using PracaInzynierska.Domain.IRepositories;
+using PracaInzynierska.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PracaInżynierska.Infrastructure.Repositories
+namespace PracaInzynierska.Infrastructure.Repositories
 {
     public class FinancialChangeRepository : Repository<FinancialChange>, IFinancialChangeRepository
     {
@@ -17,7 +17,13 @@ namespace PracaInżynierska.Infrastructure.Repositories
 
         public async Task<List<FinancialChange>> FindForGuid(Guid guid)
         {
-            return await _dbContext.FinancialChange.Where(x => x.Owner.AutoLoginGUID == guid.ToString()).ToListAsync();
+            return await _dbContext.FinancialChange.Where(x => x.Owner.AutoLoginGUID == guid.ToString()).Include(fc => fc.Category).ToListAsync();
+        }
+        public async Task<List<FinancialChange>> FindAllAsync()
+        {
+            return await _dbContext.FinancialChange
+                .Include(fc => fc.Category)
+                .ToListAsync();
         }
     }
 }

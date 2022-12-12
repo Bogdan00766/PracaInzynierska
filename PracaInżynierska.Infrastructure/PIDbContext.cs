@@ -1,6 +1,6 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
-using PracaInżynierska.Domain.Models;
+using PracaInzynierska.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace PracaInżynierska.Infrastructure
+namespace PracaInzynierska.Infrastructure
 {
     public class PIDbContext : DbContext
     {
@@ -24,15 +24,19 @@ namespace PracaInżynierska.Infrastructure
         //    Database.SetInitializer(sqliteConnectionInitializer);
         //}
 
+        //MSSQLBogdan!
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder
+        //        .UseSqlite("Data Source=C:\\Repozytoria\\PracaInzynierska\\PracaInżynierska.Api\\PracaInz.db");
 
+        //}
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder
-                .UseSqlite("Data Source=PracaInz.db");
-
+                .UseSqlServer("Server=51.137.50.51;Database=PracaInz;User Id=sa;Password=MSSQLBogdan!; Trusted_Connection=False; TrustServerCertificate=True");
         }
-        
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>()
                 .HasIndex(u => u.EMail)

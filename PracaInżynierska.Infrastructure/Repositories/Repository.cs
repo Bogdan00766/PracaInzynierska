@@ -1,14 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using PracaInżynierska.Domain.IRepositories;
-using PracaInżynierska.Domain.Models;
+using PracaInzynierska.Domain.IRepositories;
+using PracaInzynierska.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PracaInżynierska.Infrastructure.Repositories
+namespace PracaInzynierska.Infrastructure.Repositories
 {
     public class Repository<T> : IRepository<T> where T : Entity
     {
@@ -46,12 +46,12 @@ namespace PracaInżynierska.Infrastructure.Repositories
             _dbContext.Update(e);
             return e;
         }
-        public async void SaveAsync()
+        public async Task SaveAsync()
         {
             await _dbContext.SaveChangesAsync();
         }
 
-        public async void DisposeAsync()
+        public async Task DisposeAsync()
         {
             await _dbContext.DisposeAsync();
         }

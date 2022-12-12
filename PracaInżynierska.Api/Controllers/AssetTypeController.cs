@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PracaInżynierska.Application.Dto;
-using PracaInżynierska.Application.Interfaces;
-using PracaInżynierska.Application.Services;
+using PracaInzynierska.Application.Dto;
+using PracaInzynierska.Application.Interfaces;
 
-namespace PracaInżynierska.Api.Controllers
+namespace PracaInzynierska.Api.Controllers
 {
     [ApiController]
     [Route("api/assettypes")]

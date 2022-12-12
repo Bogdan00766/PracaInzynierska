@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using PracaInżynierska.Application.Dto;
-using PracaInżynierska.Application.Interfaces;
-using PracaInżynierska.Application.Services;
-using PracaInżynierska.PropertyManager.Controllers;
+using PracaInzynierska.Application.Dto;
+using PracaInzynierska.Application.Interfaces;
+using PracaInzynierska.Application.Services;
+using PracaInzynierska.PropertyManager.Controllers;
 
-namespace PracaInżynierska.Api.Controllers
+namespace PracaInzynierska.Api.Controllers
 {
     [ApiController]
     [Route("api/categories")]

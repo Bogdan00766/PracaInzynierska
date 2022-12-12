@@ -2,86 +2,100 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using PracaInżynierska.Infrastructure;
+using PracaInzynierska.Infrastructure;
 
 #nullable disable
 
-namespace PracaInżynierska.Infrastructure.Migrations
+namespace PracaInzynierska.Infrastructure.Migrations
 {
     [DbContext(typeof(PIDbContext))]
-    [Migration("20221119164828_v0.22")]
-    partial class v022
+    [Migration("20221210114618_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "7.0.0");
+            modelBuilder
+                .HasAnnotation("ProductVersion", "7.0.0")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            modelBuilder.Entity("PracaInżynierska.Domain.Models.AssetType", b =>
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("PracaInzynierska.Domain.Models.AssetType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("AssetType");
                 });
 
-            modelBuilder.Entity("PracaInżynierska.Domain.Models.Category", b =>
+            modelBuilder.Entity("PracaInzynierska.Domain.Models.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Category");
                 });
 
-            modelBuilder.Entity("PracaInżynierska.Domain.Models.FinancialChange", b =>
+            modelBuilder.Entity("PracaInzynierska.Domain.Models.FinancialChange", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("AssetTypeId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<int>("CategoryId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("OwnerId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ReductionId")
+                        .HasColumnType("int");
 
                     b.Property<string>("SentFrom")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SentTo")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("TransferId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<float>("Value")
-                        .HasColumnType("REAL");
+                        .HasColumnType("real");
 
                     b.HasKey("Id");
 
@@ -91,35 +105,39 @@ namespace PracaInżynierska.Infrastructure.Migrations
 
                     b.HasIndex("OwnerId");
 
+                    b.HasIndex("ReductionId");
+
                     b.HasIndex("TransferId");
 
                     b.ToTable("FinancialChange");
                 });
 
-            modelBuilder.Entity("PracaInżynierska.Domain.Models.Transfer", b =>
+            modelBuilder.Entity("PracaInzynierska.Domain.Models.Transfer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("AccountNumber")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SentFrom")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SentTo")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("UserId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -128,29 +146,31 @@ namespace PracaInżynierska.Infrastructure.Migrations
                     b.ToTable("Transfer");
                 });
 
-            modelBuilder.Entity("PracaInżynierska.Domain.Models.User", b =>
+            modelBuilder.Entity("PracaInzynierska.Domain.Models.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("AutoLoginGUID")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("AutoLoginGUIDExpires")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("EMail")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("Password")
                         .IsRequired()
-                        .HasColumnType("BLOB");
+                        .HasColumnType("varbinary(max)");
 
                     b.HasKey("Id");
 
@@ -160,27 +180,31 @@ namespace PracaInżynierska.Infrastructure.Migrations
                     b.ToTable("User");
                 });
 
-            modelBuilder.Entity("PracaInżynierska.Domain.Models.FinancialChange", b =>
+            modelBuilder.Entity("PracaInzynierska.Domain.Models.FinancialChange", b =>
                 {
-                    b.HasOne("PracaInżynierska.Domain.Models.AssetType", "AssetType")
+                    b.HasOne("PracaInzynierska.Domain.Models.AssetType", "AssetType")
                         .WithMany()
                         .HasForeignKey("AssetTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PracaInżynierska.Domain.Models.Category", "Category")
+                    b.HasOne("PracaInzynierska.Domain.Models.Category", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PracaInżynierska.Domain.Models.User", "Owner")
+                    b.HasOne("PracaInzynierska.Domain.Models.User", "Owner")
                         .WithMany("FinancialChanges")
                         .HasForeignKey("OwnerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PracaInżynierska.Domain.Models.Transfer", "Transfer")
+                    b.HasOne("PracaInzynierska.Domain.Models.FinancialChange", "Reduction")
+                        .WithMany()
+                        .HasForeignKey("ReductionId");
+
+                    b.HasOne("PracaInzynierska.Domain.Models.Transfer", "Transfer")
                         .WithMany()
                         .HasForeignKey("TransferId");
 
@@ -190,17 +214,19 @@ namespace PracaInżynierska.Infrastructure.Migrations
 
                     b.Navigation("Owner");
 
+                    b.Navigation("Reduction");
+
                     b.Navigation("Transfer");
                 });
 
-            modelBuilder.Entity("PracaInżynierska.Domain.Models.Transfer", b =>
+            modelBuilder.Entity("PracaInzynierska.Domain.Models.Transfer", b =>
                 {
-                    b.HasOne("PracaInżynierska.Domain.Models.User", null)
+                    b.HasOne("PracaInzynierska.Domain.Models.User", null)
                         .WithMany("Transfers")
                         .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("PracaInżynierska.Domain.Models.User", b =>
+            modelBuilder.Entity("PracaInzynierska.Domain.Models.User", b =>
                 {
                     b.Navigation("FinancialChanges");
 

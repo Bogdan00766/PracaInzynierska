@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AddFinancialChangeDto } from '../shared/Dtos/addFinancialChangeDto';
+import { AddRemoveReductionDto } from '../shared/Dtos/AddRemoveReductionDto';
 
 @Component({
   selector: 'app-financial-change',
@@ -21,6 +22,10 @@ export class FinancialChangeComponent implements OnInit {
   asset: assetType = { name: "" };
   fchanges: financialChange[] = [];
   canDelete: boolean = false;
+  reductionId1: number = 0;
+  reductionId2: number = 0;
+  isIncome: boolean = true;
+
 
   constructor(http: HttpClient, router: Router) {
     this.http = http;
@@ -46,13 +51,60 @@ export class FinancialChangeComponent implements OnInit {
     )
 
   }
+  onReduction1Change(value: any) {
+    //this.reductionId1 = value;
+    let x = this.fchanges?.find(x => x.name == value)?.id;
+    if (x != undefined) {
+      this.reductionId1 = x;
+    }
+    console.log(this.reductionId1);
+  }
+  onReduction2Change(value: any) {
+    let x = this.fchanges?.find(x => x.name == value)?.id;
+    if (x != undefined) {
+      this.reductionId2 = x;
+    }
+    console.log(this.reductionId2);
+  }
+  onSetReductionBtnClick() {
+    let payload = new AddRemoveReductionDto();
+    payload.id1 = this.reductionId1;
+    payload.id2 = this.reductionId2;
+    
+    this.http.post('/api/financialchanges/reductions', payload).subscribe(
+      (response) => {
+        console.log(response);
+        this.getFinancialChanges();
+      },
+      (error) => {
+        console.log(error)
+      }
+    )
+  }
+  onDeleteReductionBtnClick() {
+    let httpParams = new HttpParams().set('id1', this.reductionId1);
+    httpParams.set('id2', this.reductionId2);
+    let options = { params: httpParams };
+    this.http.delete('/api/financialchanges/reductions', options).subscribe(
+      (response) => {
+        console.log(response);
+        this.getFinancialChanges();
+      },
+      (error) => {
+        console.log(error)
+      }
+    )
+  }
   onAssetTypeChange(value: string) {
     this.newFinancialChange.assetTypeName = value;
   }
   onCategoryChange(value: string) {
     this.newFinancialChange.categoryName = value;
   }
-
+  onIncomeChange(value: string) {
+    if (value == "Wydatek") this.isIncome = false;
+    else this.isIncome = true;
+  }
   getCategories(): void {
     this.http.get<category[]>('/api/categories').subscribe(
       (response) => {
@@ -89,6 +141,8 @@ export class FinancialChangeComponent implements OnInit {
     )
   }
 
+
+
   onAddCategoryBtnClick() {
     this.cat.name = this.newCategory;
     this.http.post('/api/categories', this.cat).subscribe(
@@ -120,6 +174,7 @@ export class FinancialChangeComponent implements OnInit {
   }
 
   onAddfChangeBtnClick() {
+    if (this.isIncome == false) this.newFinancialChange.value *= -1;
     this.http.post('/api/financialchanges', this.newFinancialChange).subscribe(
       (response) => {
         console.log(response);
@@ -144,6 +199,11 @@ interface financialChange {
   value: number;
   sentFrom: string;
   sentTo: string;
+  reductionId: string;
   categoryName: string;
   assetTypeName: string;
+}
+interface setReduction {
+  id1: number;
+  id2: number;
 }

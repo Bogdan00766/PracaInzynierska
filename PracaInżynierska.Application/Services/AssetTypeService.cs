@@ -1,15 +1,15 @@
 ﻿using AutoMapper;
-using PracaInżynierska.Application.Dto;
-using PracaInżynierska.Application.Interfaces;
-using PracaInżynierska.Domain.IRepositories;
-using PracaInżynierska.Domain.Models;
+using PracaInzynierska.Application.Dto;
+using PracaInzynierska.Application.Interfaces;
+using PracaInzynierska.Domain.IRepositories;
+using PracaInzynierska.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PracaInżynierska.Application.Services
+namespace PracaInzynierska.Application.Services
 {
     public class AssetTypeService : IAssetTypeService
     {

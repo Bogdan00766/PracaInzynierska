@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CurrentUser } from '../shared/CurrentUser';
 
 @Component({
   selector: 'app-nav-menu',
@@ -6,10 +7,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./nav-menu.component.css']
 })
 export class NavMenuComponent implements OnInit {
+  
 
-  constructor() { }
-
+  constructor() {
+    if (CurrentUser.id < 0)
+      this.isLogged = false;
+    else
+      this.isLogged = true;
+}
+  isLogged: boolean = false;
   ngOnInit(): void {
+    
   }
 
 }

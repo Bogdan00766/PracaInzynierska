@@ -1,4 +1,4 @@
-﻿namespace PracaInżynierska.Domain.Models
+﻿namespace PracaInzynierska.Domain.Models
 {
     public class Transfer : Entity
     {

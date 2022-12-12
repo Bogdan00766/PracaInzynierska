@@ -7,11 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="11.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PracaInżynierska.Domain\PracaInżynierska.Domain.csproj" />
+    <ProjectReference Include="..\PracaInżynierska.Domain\PracaInzynierska.Domain.csproj" />
   </ItemGroup>
 
 </Project>

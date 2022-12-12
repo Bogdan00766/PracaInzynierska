@@ -1,11 +1,11 @@
-﻿using PracaInżynierska.Domain.Models;
+﻿using PracaInzynierska.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PracaInżynierska.Domain.IRepositories
+namespace PracaInzynierska.Domain.IRepositories
 {
     public interface IRepository<T> where T : Entity
     {
@@ -14,7 +14,7 @@ namespace PracaInżynierska.Domain.IRepositories
         T Delete(T e);
         Task<T> FindByIdAsync(int id);
         Task<List<T>> FindAllAsync();
-        void SaveAsync();
-        void DisposeAsync();
+        Task SaveAsync();
+        Task DisposeAsync();
     }
 }
