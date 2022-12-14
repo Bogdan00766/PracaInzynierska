@@ -17,5 +17,6 @@ namespace PracaInzynierska.Application.Dto
         public string CategoryName { get; set; }
         public string AssetTypeName { get; set; }
         public int ReductionId { get; set; }
+        public DateTime CreationDate { get; set; }
     }
 }

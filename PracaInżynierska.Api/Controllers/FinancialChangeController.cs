@@ -28,7 +28,7 @@ namespace PracaInzynierska.Api.Controllers
             var guidString = Request.Cookies["GUID"];
             Guid guid;
             if (Guid.TryParse(guidString, out guid))
-                return Ok(await _fcService.GetAllByGuidAsync(guid));
+                return Ok(await _fcService.GetAllByGuidAsync(guid, startDate, endDate));
             return BadRequest("GUID parse error");
         }
 

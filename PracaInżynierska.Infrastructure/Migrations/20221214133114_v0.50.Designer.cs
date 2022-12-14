@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PracaInzynierska.Infrastructure;
 
@@ -11,9 +12,11 @@ using PracaInzynierska.Infrastructure;
 namespace PracaInzynierska.Infrastructure.Migrations
 {
     [DbContext(typeof(PIDbContext))]
-    partial class PIDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221214133114_v0.50")]
+    partial class v050
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

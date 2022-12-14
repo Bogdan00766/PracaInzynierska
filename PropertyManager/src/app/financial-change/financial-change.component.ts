@@ -30,6 +30,7 @@ export class FinancialChangeComponent implements OnInit {
   constructor(http: HttpClient, router: Router) {
     this.http = http;
     this.router = router;
+    //this.fchanges[1].creationDate.year
   }
 
   ngOnInit(): void {
@@ -224,6 +225,7 @@ interface financialChange {
   reductionId: string;
   categoryName: string;
   assetTypeName: string;
+  creationDate: Date;
 }
 interface setReduction {
   id1: number;

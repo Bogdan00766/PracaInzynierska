@@ -92,9 +92,14 @@ namespace PracaInzynierska.Application.Services
 
        
 
-        public async Task<List<FinancialChangeDto>> GetAllByGuidAsync(Guid guid)
+        public async Task<List<FinancialChangeDto>> GetAllByGuidAsync(Guid guid, string startDate, string endDate)
         {
-            return _mapper.Map<List<FinancialChangeDto>>(await _financialChangeRepository.FindForGuid(guid));
+            var startArr = startDate.Split(':');
+            var endArr = endDate.Split(':');
+            DateTime start = new DateTime(Int32.Parse(startArr[2]), Int32.Parse(startArr[1]), Int32.Parse(startArr[0]));
+            DateTime end = new DateTime(Int32.Parse(endArr[2]), Int32.Parse(endArr[1]), Int32.Parse(endArr[0]));
+
+            return _mapper.Map<List<FinancialChangeDto>>(await _financialChangeRepository.FindForGuid(guid, start, end));
         }
 
 

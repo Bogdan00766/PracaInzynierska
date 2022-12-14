@@ -9,6 +9,7 @@
         public string SentTo { get; set; }
         public Category Category { get; set; }
         public AssetType AssetType { get; set; }
+        public DateTime CreationDate { get; set; }
         public User Owner { get; set; }
         public FinancialChange? Reduction { get; set; }
     }
