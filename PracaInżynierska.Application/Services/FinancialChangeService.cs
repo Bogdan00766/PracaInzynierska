@@ -92,9 +92,11 @@ namespace PracaInzynierska.Application.Services
 
        
 
-        public async Task<List<FinancialChangeDto>> GetAllAsync(Guid guid)
+        public async Task<List<FinancialChangeDto>> GetAllByGuidAsync(Guid guid)
         {
             return _mapper.Map<List<FinancialChangeDto>>(await _financialChangeRepository.FindForGuid(guid));
         }
+
+
     }
 }

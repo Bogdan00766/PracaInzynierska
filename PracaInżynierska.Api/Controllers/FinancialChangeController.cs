@@ -23,12 +23,12 @@ namespace PracaInzynierska.Api.Controllers
             _fcService = fcService;
         }
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAllByGuid(string? startDate = "01:01:1900", string? endDate = "01:01:9900")
         {
             var guidString = Request.Cookies["GUID"];
             Guid guid;
             if (Guid.TryParse(guidString, out guid))
-                return Ok(await _fcService.GetAllAsync(guid));
+                return Ok(await _fcService.GetAllByGuidAsync(guid));
             return BadRequest("GUID parse error");
         }
 

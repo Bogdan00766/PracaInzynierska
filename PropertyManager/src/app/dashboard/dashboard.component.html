@@ -1,1 +1,27 @@
-<p>dashboard works!</p>
+<form-field class="example-form-field" appearance="fill">
+  <label>First campaign</label>
+  <date-range-input [formGroup]="campaignOne"
+                        [rangePicker]="campaignOnePicker"
+                        [comparisonStart]="campaignTwo.value.start"
+                        [comparisonEnd]="campaignTwo.value.end">
+    <input matStartDate placeholder="Start date" formControlName="start">
+    <input matEndDate placeholder="End date" formControlName="end">
+  </date-range-input>
+  <hint>MM/DD/YYYY – MM/DD/YYYY</hint>
+  <datepicker-toggle matIconSuffix [for]="campaignOnePicker"></datepicker-toggle>
+  <date-range-picker #campaignOnePicker></date-range-picker>
+</form-field>
+
+<!--<mat-form-field class="example-form-field" appearance="fill">
+  <mat-label>Second campaign</mat-label>
+  <mat-date-range-input [formGroup]="campaignTwo"
+                        [rangePicker]="campaignTwoPicker"
+                        [comparisonStart]="campaignOne.value.start"
+                        [comparisonEnd]="campaignOne.value.end">
+    <input matStartDate placeholder="Start date" formControlName="start">
+    <input matEndDate placeholder="End date" formControlName="end">
+  </mat-date-range-input>
+  <mat-datepicker-toggle matIconSuffix [for]="campaignTwoPicker"></mat-datepicker-toggle>
+  <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+  <mat-date-range-picker #campaignTwoPicker></mat-date-range-picker>
+</mat-form-field>-->
