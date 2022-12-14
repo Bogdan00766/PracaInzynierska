@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-//import { NgbAlertModule, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAlertModule, NgbDatepickerModule, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { JsonPipe } from '@angular/common';
 
@@ -9,10 +9,14 @@ import { JsonPipe } from '@angular/common';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  startDate: NgbDateStruct = { year: 0, month: 0, day: 0 };
+  endDate: NgbDateStruct = { year: 9999, month: 0, day: 0 };
 
-  model: NgbDateStruct;
 
-  constructor() { }
+
+  constructor() {
+
+  }
 
   ngOnInit(): void {
   }

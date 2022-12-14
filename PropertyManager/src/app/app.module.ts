@@ -11,7 +11,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { LogoutComponent } from './logout/logout.component';
 import { FinancialChangeComponent } from './financial-change/financial-change.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { MatAutocompleteModule, MatButtonModule, MatCheckboxModule, MatDatepickerModule, MatFormFieldModule, MatInputModule, MatRadioModule, MatSelectModule, MatSliderModule, MatSlideToggleModule } from '@angular/material';
+//import { MatAutocompleteModule, MatButtonModule, MatCheckboxModule, MatDatepickerModule, MatFormFieldModule, MatInputModule, MatRadioModule, MatSelectModule, MatSliderModule, MatSlideToggleModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -27,16 +29,18 @@ import { MatAutocompleteModule, MatButtonModule, MatCheckboxModule, MatDatepicke
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
-    MatAutocompleteModule,
-    MatButtonModule,
-    MatCheckboxModule,
-    MatDatepickerModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatRadioModule,
-    MatSelectModule,
-    MatSliderModule,
-    MatSlideToggleModule
+    //MatAutocompleteModule,
+    //MatButtonModule,
+    //MatCheckboxModule,
+    //MatDatepickerModule,
+    //MatFormFieldModule,
+    //MatInputModule,
+    //MatRadioModule,
+    //MatSelectModule,
+    //MatSliderModule,
+    //MatSlideToggleModule,
+    BrowserAnimationsModule,
+    NgbModule
   ],
   providers: [
     {

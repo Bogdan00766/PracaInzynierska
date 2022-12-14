@@ -21,6 +21,8 @@
     "@angular/platform-browser": "^15.0.3",
     "@angular/platform-browser-dynamic": "^15.0.3",
     "@angular/router": "^15.0.3",
+    "@ng-bootstrap/ng-bootstrap": "^14.0.0",
+    "@popperjs/core": "^2.11.6",
     "bootstrap": "^5.2.1",
     "jest-editor-support": "*",
     "jquery": "^3.6.1",
@@ -30,8 +32,9 @@
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^14.2.2",
+    "@angular-devkit/build-angular": "^15.0.3",
     "@angular/cli": "^15.0.3",
+    "@angular/localize": "^15.0.3",
     "@types/jasmine": "~4.0.0",
     "jasmine-core": "~4.3.0",
     "karma": "~6.4.0",
