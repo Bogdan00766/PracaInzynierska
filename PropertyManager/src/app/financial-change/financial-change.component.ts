@@ -75,15 +75,14 @@ export class FinancialChangeComponent implements OnInit {
 
   }
   onReduction1Change(value: any) {
-    //this.reductionId1 = value;
-    let x = this.fchanges?.find(x => x.name == value)?.id;
+    var x = this.fchanges?.find(x => x.name == value)?.id;
     if (x != undefined) {
       this.reductionId1 = x;
     }
     console.log(this.reductionId1);
   }
   onReduction2Change(value: any) {
-    let x = this.fchanges?.find(x => x.name == value)?.id;
+    var x = this.fchanges?.find(x => x.name == value)?.id;
     if (x != undefined) {
       this.reductionId2 = x;
     }
@@ -105,10 +104,12 @@ export class FinancialChangeComponent implements OnInit {
     )
   }
   onDeleteReductionBtnClick() {
-    let httpParams = new HttpParams().set('id1', this.reductionId1);
-    httpParams.set('id2', this.reductionId2);
+    let httpParams = new HttpParams().set('id2', this.reductionId2).set('id1', this.reductionId1);
+    //httpParams.append('id1', this.reductionId1);
+    //httpParams.set('id2', this.reductionId2);
     let options = { params: httpParams };
-    this.http.delete('/api/financialchanges/reductions', options).subscribe(
+    console.log(options);
+    this.http.get('/api/financialchanges/reductions', options).subscribe(
       (response) => {
         console.log(response);
         this.getFinancialChanges();

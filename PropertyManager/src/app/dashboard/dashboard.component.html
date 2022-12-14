@@ -36,8 +36,11 @@
 </div>
 
 <hr />
-
-<!--<pre> {{fcList | json}}</pre>-->
+ <!--<h3 style="color:green">Saldo: {{balance}}</h3>-->
+<h3 style="color:green" *ngIf="balance>=0">Saldo: {{balance}}</h3>
+<h3 style="color:red" *ngIf="balance<0">Saldo: {{balance}}</h3>
+<hr />
+<pre> {{fcList | json}}</pre>
 <!--<ngb-alert class="mt-3 mb-0" type="info" [dismissible]="true">
   You must provide the icon for the button that matches your application's style. In this example, the icon comes from
   <code>bootstrap-icons</code>.

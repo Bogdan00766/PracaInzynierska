@@ -45,6 +45,7 @@ namespace PracaInzynierska.Application.Services
 
         public async Task<bool> SetReduction(int id1, int id2)
         {
+            
             var fc1 = await _financialChangeRepository.FindByIdAsync(id1);
             var fc2 = await _financialChangeRepository.FindByIdAsync(id2);
             if (fc1 != null && fc2 != null)
@@ -52,8 +53,9 @@ namespace PracaInzynierska.Application.Services
                 fc1.Reduction = fc2;
                 fc2.Reduction = fc1;
                 _financialChangeRepository.Update(fc1);
+                await _financialChangeRepository.SaveAsync();
                 _financialChangeRepository.Update(fc2);
-                _financialChangeRepository.SaveAsync();
+                await _financialChangeRepository.SaveAsync();
                 return true;
             }
             else throw new ArgumentException("Record not exist");
@@ -68,8 +70,9 @@ namespace PracaInzynierska.Application.Services
                 fc1.Reduction = null;
                 fc2.Reduction = null;
                 _financialChangeRepository.Update(fc1);
+                await _financialChangeRepository.SaveAsync();
                 _financialChangeRepository.Update(fc2);
-                _financialChangeRepository.SaveAsync();
+                await _financialChangeRepository.SaveAsync();
                 return true;
             }
             else throw new ArgumentException("Record not exist");

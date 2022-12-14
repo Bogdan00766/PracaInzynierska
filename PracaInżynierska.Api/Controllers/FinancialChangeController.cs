@@ -23,7 +23,7 @@ namespace PracaInzynierska.Api.Controllers
             _fcService = fcService;
         }
         [HttpGet]
-        public async Task<IActionResult> GetAllByGuid(string? startDate = "01:01:1900", string? endDate = "01:01:9900")
+        public async Task<IActionResult> GetAllByGuid(string? startDate = "01:01:0001", string? endDate = "01:01:9900")
         {
             var guidString = Request.Cookies["GUID"];
             Guid guid;
@@ -80,6 +80,7 @@ namespace PracaInzynierska.Api.Controllers
         [HttpPost("reductions")]
         public async Task<IActionResult> SetReduction(SetReduction reductions)
         {
+            if (reductions.Id1 == reductions.Id2) return BadRequest("IDs cannot be the same");
             try
             {
                 if (await _fcService.SetReduction(reductions.Id1, reductions.Id2)) return Ok();
@@ -90,12 +91,12 @@ namespace PracaInzynierska.Api.Controllers
             }
             return BadRequest("Setting Reduction error");
         }
-        [HttpDelete("reductions")]
-        public async Task<IActionResult> DeleteReduction(SetReduction reductions)
+        [HttpGet("reductions")]
+        public async Task<IActionResult> DeleteReduction(int id1, int id2)
         {
             try
             {
-                if (await _fcService.DeleteReduction(reductions.Id1, reductions.Id2)) return Ok();
+                if (await _fcService.DeleteReduction(id1, id2)) return Ok();
             }
             catch (ArgumentException e)
             {

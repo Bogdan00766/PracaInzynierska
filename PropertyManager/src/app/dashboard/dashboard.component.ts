@@ -11,12 +11,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  startDate: NgbDateStruct = { year: 1, month: 1, day: 1 };
+  startDate: NgbDateStruct = { year: 2020, month: 1, day: 1 };
   endDate: NgbDateStruct;
   fcList: financialChange[] = [];
   http: HttpClient;
   router: Router;
-
+  balance: number = 0;
 
   constructor(http: HttpClient, router: Router) {
     this.http = http;
@@ -26,9 +26,19 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getFinancialChanges();
   }
   onDashboardUpdateBtnClick() {
+    this.balance = 0;
     this.getFinancialChanges();
+  }
+
+  calculateBalance() {
+    var sum = this.fcList.reduce((accummulator, current) => {
+      //if (current.reductionId != null) return accummulator;
+      return accummulator + current.value;
+    }, 0);
+    this.balance = Math.round(sum * 100) / 100;
   }
 
   getFinancialChanges(): void {
@@ -39,6 +49,7 @@ export class DashboardComponent implements OnInit {
       (response) => {
         console.log(response);
         this.fcList = response;
+        this.calculateBalance();
       },
       (error) => {
         console.log(error)
