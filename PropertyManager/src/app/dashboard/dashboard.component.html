@@ -36,10 +36,29 @@
 </div>
 
 <hr />
- <!--<h3 style="color:green">Saldo: {{balance}}</h3>-->
 <h3 style="color:green" *ngIf="balance>=0">Saldo: {{balance}}</h3>
 <h3 style="color:red" *ngIf="balance<0">Saldo: {{balance}}</h3>
+
 <hr />
+<div class="row-auto">
+    <canvas baseChart class="chart col-3"
+            [data]="pieChartData"
+            [type]="pieChartType"
+            [options]="pieChartOptions"
+            [plugins]="pieChartPlugins">
+    </canvas>
+
+</div>
+<hr />
+<div class="row-auto">
+  <canvas baseChart class="chart col-3"
+          [data]="incomeCategoryData"
+          [type]="pieChartType"
+          [options]="incomeCategoryOptions"
+          [plugins]="pieChartPlugins">
+  </canvas>
+</div>
+<hr/>
 <pre> {{fcList | json}}</pre>
 <!--<ngb-alert class="mt-3 mb-0" type="info" [dismissible]="true">
   You must provide the icon for the button that matches your application's style. In this example, the icon comes from
