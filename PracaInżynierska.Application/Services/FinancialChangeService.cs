@@ -45,15 +45,18 @@ namespace PracaInzynierska.Application.Services
 
         public async Task<bool> SetReduction(int id1, int id2)
         {
+            
             var fc1 = await _financialChangeRepository.FindByIdAsync(id1);
             var fc2 = await _financialChangeRepository.FindByIdAsync(id2);
             if (fc1 != null && fc2 != null)
             {
+                if (fc1 == fc2) throw new ArgumentException("Cannot be same ids");
                 fc1.Reduction = fc2;
                 fc2.Reduction = fc1;
                 _financialChangeRepository.Update(fc1);
+                await _financialChangeRepository.SaveAsync();
                 _financialChangeRepository.Update(fc2);
-                _financialChangeRepository.SaveAsync();
+                await _financialChangeRepository.SaveAsync();
                 return true;
             }
             else throw new ArgumentException("Record not exist");
@@ -65,11 +68,13 @@ namespace PracaInzynierska.Application.Services
             var fc2 = await _financialChangeRepository.FindByIdAsync(id2);
             if (fc1 != null && fc2 != null)
             {
+                if (fc1 == fc2) throw new ArgumentException("Cannot be same ids");
                 fc1.Reduction = null;
                 fc2.Reduction = null;
                 _financialChangeRepository.Update(fc1);
+                await _financialChangeRepository.SaveAsync();
                 _financialChangeRepository.Update(fc2);
-                _financialChangeRepository.SaveAsync();
+                await _financialChangeRepository.SaveAsync();
                 return true;
             }
             else throw new ArgumentException("Record not exist");
@@ -92,9 +97,16 @@ namespace PracaInzynierska.Application.Services
 
        
 
-        public async Task<List<FinancialChangeDto>> GetAllAsync(Guid guid)
+        public async Task<List<FinancialChangeDto>> GetAllByGuidAsync(Guid guid, string startDate, string endDate)
         {
-            return _mapper.Map<List<FinancialChangeDto>>(await _financialChangeRepository.FindForGuid(guid));
+            var startArr = startDate.Split(':');
+            var endArr = endDate.Split(':');
+            DateTime start = new DateTime(Int32.Parse(startArr[2]), Int32.Parse(startArr[1]), Int32.Parse(startArr[0]));
+            DateTime end = new DateTime(Int32.Parse(endArr[2]), Int32.Parse(endArr[1]), Int32.Parse(endArr[0]));
+
+            return _mapper.Map<List<FinancialChangeDto>>(await _financialChangeRepository.FindForGuid(guid, start, end));
         }
+
+
     }
 }

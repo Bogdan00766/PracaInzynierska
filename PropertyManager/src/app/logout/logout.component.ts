@@ -27,7 +27,9 @@ export class LogoutComponent implements OnInit {
         CurrentUser.email = "";
         CurrentUser.userName = "";
         this.message = "Pomyślnie wylogowano";
-        this.router.navigate(['/login']);
+        setTimeout(() => {
+          this.router.navigate(['/login']);
+        }, 500);
       },
       (error) => {
         console.log(error);

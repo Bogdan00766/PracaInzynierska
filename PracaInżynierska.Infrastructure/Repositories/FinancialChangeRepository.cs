@@ -15,9 +15,9 @@ namespace PracaInzynierska.Infrastructure.Repositories
         {
         }
 
-        public async Task<List<FinancialChange>> FindForGuid(Guid guid)
+        public async Task<List<FinancialChange>> FindForGuid(Guid guid, DateTime startDate, DateTime endDate)
         {
-            return await _dbContext.FinancialChange.Where(x => x.Owner.AutoLoginGUID == guid.ToString()).Include(fc => fc.Category).ToListAsync();
+            return await _dbContext.FinancialChange.Where(x => x.Owner.AutoLoginGUID == guid.ToString() && x.CreationDate.Date>=startDate && x.CreationDate.Date<=endDate).Include(fc => fc.Category).Include(fc => fc.AssetType).ToListAsync();
         }
         public async Task<List<FinancialChange>> FindAllAsync()
         {

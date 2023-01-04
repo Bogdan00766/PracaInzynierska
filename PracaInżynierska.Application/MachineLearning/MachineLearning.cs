@@ -18,7 +18,7 @@ namespace PracaInzynierska.Application.MachineLearning
     {
         private readonly string _modelPath = Path.Combine(AppContext.BaseDirectory, "svm.mdl");
     
-        public int NaiveBayesPredict(MLFinancialChangeDto dto)
+        public async Task<int> NaiveBayesPredict(MLFinancialChangeDto dto)
         {
             MLFinancialChange mfc = new MLFinancialChange()
             {

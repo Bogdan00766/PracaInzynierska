@@ -34,5 +34,11 @@ namespace PracaInzynierska.Application.Services
         {
             return _mapper.Map<List<CategoryDto>>(await _categoryRepository.FindAllAsync());
         }
+
+        public async Task<string> GetCategoryNameByIdAsync(int id)
+        {
+            var cat = await _categoryRepository.FindByIdAsync(id);
+            return cat.Name;
+        }
     }
 }

@@ -16,7 +16,6 @@ namespace PracaInzynierska.Infrastructure
         public DbSet<User> User { get; set; }
         public DbSet<AssetType> AssetType { get; set; }
         public DbSet<FinancialChange> FinancialChange { get; set; }
-        public DbSet<Transfer> Transfer { get; set; }
 
         //protected override void OnModelCreating(DbModelBuilder modelBuilder)
         //{

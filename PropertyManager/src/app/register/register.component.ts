@@ -63,7 +63,7 @@ export class RegisterComponent implements OnInit {
         CurrentUser.id = response.id;
         CurrentUser.userName = response.name;
         CurrentUser.email = response.eMail;
-        this.router.navigate(['financialchanges']);
+        this.router.navigate(['dashboard']);
       },
       (error) => {
         console.log(error)

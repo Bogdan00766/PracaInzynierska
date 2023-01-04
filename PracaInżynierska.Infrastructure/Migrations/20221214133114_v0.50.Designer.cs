@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PracaInzynierska.Infrastructure;
 
@@ -11,9 +12,11 @@ using PracaInzynierska.Infrastructure;
 namespace PracaInzynierska.Infrastructure.Migrations
 {
     [DbContext(typeof(PIDbContext))]
-    partial class PIDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221214133114_v0.50")]
+    partial class v050
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -91,6 +94,9 @@ namespace PracaInzynierska.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("TransferId")
+                        .HasColumnType("int");
+
                     b.Property<float>("Value")
                         .HasColumnType("real");
 
@@ -104,7 +110,43 @@ namespace PracaInzynierska.Infrastructure.Migrations
 
                     b.HasIndex("ReductionId");
 
+                    b.HasIndex("TransferId");
+
                     b.ToTable("FinancialChange");
+                });
+
+            modelBuilder.Entity("PracaInzynierska.Domain.Models.Transfer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AccountNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SentFrom")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SentTo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Transfer");
                 });
 
             modelBuilder.Entity("PracaInzynierska.Domain.Models.User", b =>
@@ -165,6 +207,10 @@ namespace PracaInzynierska.Infrastructure.Migrations
                         .WithMany()
                         .HasForeignKey("ReductionId");
 
+                    b.HasOne("PracaInzynierska.Domain.Models.Transfer", "Transfer")
+                        .WithMany()
+                        .HasForeignKey("TransferId");
+
                     b.Navigation("AssetType");
 
                     b.Navigation("Category");
@@ -172,11 +218,22 @@ namespace PracaInzynierska.Infrastructure.Migrations
                     b.Navigation("Owner");
 
                     b.Navigation("Reduction");
+
+                    b.Navigation("Transfer");
+                });
+
+            modelBuilder.Entity("PracaInzynierska.Domain.Models.Transfer", b =>
+                {
+                    b.HasOne("PracaInzynierska.Domain.Models.User", null)
+                        .WithMany("Transfers")
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("PracaInzynierska.Domain.Models.User", b =>
                 {
                     b.Navigation("FinancialChanges");
+
+                    b.Navigation("Transfers");
                 });
 #pragma warning restore 612, 618
         }

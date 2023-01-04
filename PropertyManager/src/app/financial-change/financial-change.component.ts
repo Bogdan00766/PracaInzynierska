@@ -25,11 +25,12 @@ export class FinancialChangeComponent implements OnInit {
   reductionId1: number = 0;
   reductionId2: number = 0;
   isIncome: boolean = true;
-
+  suggestedCategory: category = { name: "" }; 
 
   constructor(http: HttpClient, router: Router) {
     this.http = http;
     this.router = router;
+    //this.fchanges[1].creationDate.year
   }
 
   ngOnInit(): void {
@@ -37,6 +38,28 @@ export class FinancialChangeComponent implements OnInit {
     this.getAssets();
     this.getFinancialChanges();
   }
+
+  newFcNameValueChange() {
+    console.log("XD");
+    if (this.newFinancialChange.name != "" && this.newFinancialChange.value != 0) {
+
+      console.log("XD inside");
+      let httpParams = new HttpParams().set('name', this.newFinancialChange.name);
+      httpParams.set('value', this.newFinancialChange.value);
+      let options = { params: httpParams };
+      this.http.get<category>('/api/financialchanges/suggestcategory', options).subscribe(
+        (response) => {
+          this.suggestedCategory.name = response.name;
+          console.log(response);
+          console.log(this.suggestedCategory);
+        },
+        (error) => {
+          console.log(error)
+        }
+      )
+    }
+  }
+
   OnDeleteButtonClick(item: any) {
     let httpParams = new HttpParams().set('id', item.id);
     let options = { params: httpParams };
@@ -52,15 +75,14 @@ export class FinancialChangeComponent implements OnInit {
 
   }
   onReduction1Change(value: any) {
-    //this.reductionId1 = value;
-    let x = this.fchanges?.find(x => x.name == value)?.id;
+    var x = this.fchanges?.find(x => x.name == value)?.id;
     if (x != undefined) {
       this.reductionId1 = x;
     }
     console.log(this.reductionId1);
   }
   onReduction2Change(value: any) {
-    let x = this.fchanges?.find(x => x.name == value)?.id;
+    var x = this.fchanges?.find(x => x.name == value)?.id;
     if (x != undefined) {
       this.reductionId2 = x;
     }
@@ -82,10 +104,12 @@ export class FinancialChangeComponent implements OnInit {
     )
   }
   onDeleteReductionBtnClick() {
-    let httpParams = new HttpParams().set('id1', this.reductionId1);
-    httpParams.set('id2', this.reductionId2);
+    let httpParams = new HttpParams().set('id2', this.reductionId2).set('id1', this.reductionId1);
+    //httpParams.append('id1', this.reductionId1);
+    //httpParams.set('id2', this.reductionId2);
     let options = { params: httpParams };
-    this.http.delete('/api/financialchanges/reductions', options).subscribe(
+    console.log(options);
+    this.http.get('/api/financialchanges/reductions', options).subscribe(
       (response) => {
         console.log(response);
         this.getFinancialChanges();
@@ -202,6 +226,7 @@ interface financialChange {
   reductionId: string;
   categoryName: string;
   assetTypeName: string;
+  creationDate: Date;
 }
 interface setReduction {
   id1: number;

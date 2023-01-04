@@ -10,6 +10,6 @@ namespace PracaInzynierska.Application.MachineLearning
 {
     public interface IMachineLearning
     {
-        public int NaiveBayesPredict(MLFinancialChangeDto mfc);
+        public Task<int> NaiveBayesPredict(MLFinancialChangeDto mfc);
     }
 }

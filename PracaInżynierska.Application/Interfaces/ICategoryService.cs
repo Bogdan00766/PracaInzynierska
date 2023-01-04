@@ -12,5 +12,6 @@ namespace PracaInzynierska.Application.Interfaces
     {
         Category AddCategory(string name);
         Task<List<CategoryDto>> GetAllCategoriesAsync();
+        Task<string> GetCategoryNameByIdAsync(int id);
     }
 }
