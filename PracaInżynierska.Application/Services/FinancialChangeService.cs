@@ -50,6 +50,7 @@ namespace PracaInzynierska.Application.Services
             var fc2 = await _financialChangeRepository.FindByIdAsync(id2);
             if (fc1 != null && fc2 != null)
             {
+                if (fc1 == fc2) throw new ArgumentException("Cannot be same ids");
                 fc1.Reduction = fc2;
                 fc2.Reduction = fc1;
                 _financialChangeRepository.Update(fc1);
@@ -67,6 +68,7 @@ namespace PracaInzynierska.Application.Services
             var fc2 = await _financialChangeRepository.FindByIdAsync(id2);
             if (fc1 != null && fc2 != null)
             {
+                if (fc1 == fc2) throw new ArgumentException("Cannot be same ids");
                 fc1.Reduction = null;
                 fc2.Reduction = null;
                 _financialChangeRepository.Update(fc1);

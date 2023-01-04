@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import DatalabelsPlugin from 'chartjs-plugin-datalabels';
 import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
+import { bottom } from '@popperjs/core';
 
 @Component({
   selector: 'app-dashboard',
@@ -25,12 +26,12 @@ export class DashboardComponent implements OnInit {
   categories: string[] = [];
   expenseData: number[] = [];
     incomeData: number[];
+  now: Date = new Date();
 
   constructor(http: HttpClient, router: Router) {
     this.http = http;
     this.router = router;
-    var now = new Date();
-    this.endDate = { year: now.getUTCFullYear(), month: now.getUTCMonth(), day: now.getUTCDay() }
+    this.endDate = { year: 2023, month: 1, day: 1 }
     console.log("XD");
     console.log(this.getExpenseData());
   }
@@ -56,10 +57,14 @@ export class DashboardComponent implements OnInit {
         if (child.chart != undefined) {
           if (index == 0) child.chart.data.datasets[0].data = this.expenseData;
           if (index == 1) child.chart.data.datasets[0].data = this.incomeData;
+          if (index == 2) {
+            child.chart.data.datasets[0].data = this.expenseData;
+            child.chart.data.datasets[1].data = this.expenseData;
+          }
           child.chart.update();
         }
       });
-    }, 2000);
+    }, 3000);
   }
 
   public pieChartOptions: ChartConfiguration['options'] = {
@@ -123,6 +128,42 @@ export class DashboardComponent implements OnInit {
       },
     }
   };
+
+  public barChartData: ChartData<'bar'> = {
+    labels: this.categories,
+    datasets: [
+      { data: [65, 59, 80, 81, 56, 55, 40], label: this.now.getMonth().toString() },
+      { data: [28, 48, 40, 19, 86, 27, 90], label: (this.now.getMonth() + 1).toString() }
+    ]
+  };
+   
+  public barChartOptions: ChartConfiguration['options'] = {
+    responsive: false,
+    // We use these empty structures as placeholders for dynamic theming.
+    scales: {
+      x: {},
+      y: {
+        
+      }
+    },
+    plugins: {
+      title: {
+        text: 'Porównanie wydatków z miesiąca poprzedniego i obecnego',
+        display: true,
+        position: bottom
+      },
+      legend: {
+        display: true,
+        position: bottom
+      },
+      datalabels: {
+        anchor: 'end',
+        align: 'end'
+      }
+    }
+  };
+  public barChartType: ChartType = 'bar';
+  public barChartPlugins = [DatalabelsPlugin];
 
   getCategories(): void {
     this.http.get<category[]>('/api/categories').subscribe(

@@ -88,6 +88,11 @@ namespace PracaInzynierska.PropertyManager.Controllers
             {
                 _logger.LogDebug($"Wylogowano {guidString}");
                 _userService.Logout(guid);
+                HttpContext.Response.Cookies.Delete("GUID");
+                HttpContext.Response.Cookies.Append("GUID", guid.ToString(), new Microsoft.AspNetCore.Http.CookieOptions
+                {
+                    Expires = DateTime.Now,
+                });
                 return Ok();
             }
             catch (Exception e)

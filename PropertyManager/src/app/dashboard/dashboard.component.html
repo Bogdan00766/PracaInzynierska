@@ -41,7 +41,7 @@
 
 <hr />
 <div class="row-auto">
-    <canvas baseChart class="chart col-3"
+    <canvas baseChart class="chart col-1"
             [data]="pieChartData"
             [type]="pieChartType"
             [options]="pieChartOptions"
@@ -51,14 +51,23 @@
 </div>
 <hr />
 <div class="row-auto">
-  <canvas baseChart class="chart col-3"
+  <canvas baseChart class="chart col-1"
           [data]="incomeCategoryData"
           [type]="pieChartType"
           [options]="incomeCategoryOptions"
           [plugins]="pieChartPlugins">
   </canvas>
 </div>
+
 <hr/>
+<div class="row-auto">
+  <canvas baseChart class="chart col-6"
+        [data]="barChartData"
+        [options]="barChartOptions"
+        [plugins]="barChartPlugins"
+        [type]="barChartType">
+</canvas>
+</div>
 <pre> {{fcList | json}}</pre>
 <!--<ngb-alert class="mt-3 mb-0" type="info" [dismissible]="true">
   You must provide the icon for the button that matches your application's style. In this example, the icon comes from

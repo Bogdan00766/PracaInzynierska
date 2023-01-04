@@ -72,7 +72,7 @@ namespace PracaInzynierska.Application.Services
             var user = _userRepository.FindUserByGUID(guid);
             if (user == null) throw new Exception("User is not logged in");
             user.AutoLoginGUID = Guid.Empty.ToString();
-            user.AutoLoginGUIDExpires = DateTime.MinValue;
+            user.AutoLoginGUIDExpires = DateTime.Now;
 
             _userRepository.SaveAsync();
         }

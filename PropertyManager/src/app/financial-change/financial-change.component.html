@@ -99,7 +99,7 @@
       <tr>
         <th scope="col">Id</th>
         <th scope="col">Nazwa</th>
-        <th scope="col">Wartość[zł]</th>
+        <th scope="col">Wartość</th>
         <th scope="col">Nadawca</th>
         <th scope="col">Odbiorca</th>
         <th scope="col">Nazwa kategorii</th>
@@ -113,7 +113,7 @@
       <tr *ngFor="let fc of fchanges">
         <td>{{fc.id}}</td>
         <td>{{fc.name}}</td>
-        <td>{{fc.value}}</td>
+        <td>{{fc.value}} zł</td>
         <td>{{fc.sentFrom}}</td>
         <td>{{fc.sentTo}}</td>
         <td>{{fc.categoryName}}</td>

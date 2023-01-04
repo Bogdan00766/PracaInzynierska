@@ -14,6 +14,5 @@ namespace PracaInzynierska.Domain.Models
         public string? AutoLoginGUID { get; set; }
         public DateTime? AutoLoginGUIDExpires { get; set; }
         public List<FinancialChange> FinancialChanges { get; set; }
-        public List<Transfer>? Transfers { get; set; }
     }
 }
