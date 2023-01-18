@@ -61,7 +61,8 @@ namespace PracaInzynierska.Application.Services
             }
             if (_userRepository.CheckPassword(email, hash))
             {
-                _userRepository.SaveAsync();
+                //_userRepository.SaveAsync();
+                //SetGuid(new Guid(), user.Id);
                 return _mapper.Map<UserDto>(user);
             }
             else throw new Exception("Wrong password");

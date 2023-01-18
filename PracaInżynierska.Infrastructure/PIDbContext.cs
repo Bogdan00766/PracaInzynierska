@@ -17,23 +17,11 @@ namespace PracaInzynierska.Infrastructure
         public DbSet<AssetType> AssetType { get; set; }
         public DbSet<FinancialChange> FinancialChange { get; set; }
 
-        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        //{
-        //    var sqliteConnectionInitializer = new SqliteCreateDatabaseIfNotExists<PIDbContext>(modelBuilder);
-        //    Database.SetInitializer(sqliteConnectionInitializer);
-        //}
 
-        //MSSQLBogdan!
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    optionsBuilder
-        //        .UseSqlite("Data Source=C:\\Repozytoria\\PracaInzynierska\\PracaInżynierska.Api\\PracaInz.db");
-
-        //}
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder
-                .UseSqlServer("Server=51.137.50.51;Database=PracaInz;User Id=sa;Password=MSSQLBogdan!; Trusted_Connection=False; TrustServerCertificate=True");
+                .UseSqlServer("connectionString");
         }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
