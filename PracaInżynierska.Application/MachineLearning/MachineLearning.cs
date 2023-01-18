@@ -28,7 +28,7 @@ namespace PracaInzynierska.Application.MachineLearning
             MLContext mlContext = new MLContext();
 
             DatabaseLoader loader = mlContext.Data.CreateDatabaseLoader<MLFinancialChange>();
-            string connectionString = @"Server=51.137.50.51;Database=PracaInz;User Id=sa;Password=MSSQLBogdan!; Trusted_Connection=False; TrustServerCertificate=True";
+            string connectionString = "ConnectionString";
             string sqlCommand = "SELECT Name, CAST(Value as REAL) as Value, CAST(CategoryId as REAL) as CategoryId FROM FinancialChange";
             
             DatabaseSource dbSource = new DatabaseSource(System.Data.SqlClient.SqlClientFactory.Instance, connectionString, sqlCommand);
