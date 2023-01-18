@@ -21,7 +21,7 @@ namespace PracaInzynierska.Infrastructure
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder
-                .UseSqlServer("ConnectionString");
+                .UseSqlServer("Server=51.137.50.51;Database=PracaInz;User Id=sa;Password=MSSQLBogdan!; Trusted_Connection=False; TrustServerCertificate=True");
         }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
