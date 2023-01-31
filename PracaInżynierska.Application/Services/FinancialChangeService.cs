@@ -3,12 +3,6 @@ using PracaInzynierska.Application.Dto;
 using PracaInzynierska.Application.Interfaces;
 using PracaInzynierska.Domain.IRepositories;
 using PracaInzynierska.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace PracaInzynierska.Application.Services
 {
@@ -35,7 +29,6 @@ namespace PracaInzynierska.Application.Services
             financialChange.AssetType = _atRepository.FindByName(dto.AssetTypeName);
             financialChange.Category = _categoryRepository.FindByName(dto.CategoryName);
             financialChange.Owner = _userRepository.FindUserByGUID(guid);
-            //financialChange.User
             if (financialChange.Owner == null || financialChange.AssetType is null || financialChange.Category is null) throw new Exception("Category or AssetType or User not exist");
             var fic = _financialChangeRepository.Create(financialChange);
             if (fic == null) throw new Exception("Not Created");
@@ -45,7 +38,7 @@ namespace PracaInzynierska.Application.Services
 
         public async Task<bool> SetReduction(int id1, int id2)
         {
-            
+
             var fc1 = await _financialChangeRepository.FindByIdAsync(id1);
             var fc2 = await _financialChangeRepository.FindByIdAsync(id2);
             if (fc1 != null && fc2 != null)
@@ -86,7 +79,7 @@ namespace PracaInzynierska.Application.Services
             {
                 var fc = await _financialChangeRepository.FindByIdAsync(id);
                 _financialChangeRepository.Delete(fc);
-                _financialChangeRepository.SaveAsync();
+                await _financialChangeRepository.SaveAsync();
                 return true;
             }
             catch
@@ -95,7 +88,7 @@ namespace PracaInzynierska.Application.Services
             }
         }
 
-       
+
 
         public async Task<List<FinancialChangeDto>> GetAllByGuidAsync(Guid guid, string startDate, string endDate)
         {

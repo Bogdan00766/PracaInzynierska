@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using PracaInzynierska.Application.Dto;
 using PracaInzynierska.Application.Interfaces;
-using PracaInzynierska.Domain.Models;
 
 namespace PracaInzynierska.PropertyManager.Controllers
 {
@@ -71,7 +69,7 @@ namespace PracaInzynierska.PropertyManager.Controllers
         {
             var guidString = Request.Cookies["GUID"];
             Guid guid;
-            if(guidString == null)
+            if (guidString == null)
             {
                 return Unauthorized();
             }

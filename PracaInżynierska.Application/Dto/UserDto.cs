@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PracaInzynierska.Application.Dto
+﻿namespace PracaInzynierska.Application.Dto
 {
     public class UserDto
-    {   public int Id { get; set; }
+    {
+        public int Id { get; set; }
         public string Name { get; set; }
         public string EMail { get; set; }
     }

@@ -3,11 +3,6 @@ using PracaInzynierska.Application.Dto;
 using PracaInzynierska.Application.Interfaces;
 using PracaInzynierska.Domain.IRepositories;
 using PracaInzynierska.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PracaInzynierska.Application.Services
 {
@@ -23,7 +18,7 @@ namespace PracaInzynierska.Application.Services
 
         public AssetType AddAssetType(string name)
         {
-            AssetType assetType = new AssetType{ Name = name, };
+            AssetType assetType = new AssetType { Name = name, };
             var at = _assetTypeRepository.Create(assetType);
             if (at == null) return new AssetType { Name = "AlreadyExist" };
             return at;

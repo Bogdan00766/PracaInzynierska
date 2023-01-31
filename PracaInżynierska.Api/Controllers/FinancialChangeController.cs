@@ -2,7 +2,6 @@
 using PracaInzynierska.Application.Dto;
 using PracaInzynierska.Application.Interfaces;
 using PracaInzynierska.Application.MachineLearning;
-using PracaInzynierska.Application.MachineLearning.Models;
 
 namespace PracaInzynierska.Api.Controllers
 {
@@ -15,7 +14,7 @@ namespace PracaInzynierska.Api.Controllers
         private readonly ILogger<FinancialChangeController> _logger;
         private readonly IFinancialChangeService _fcService;
 
-        public FinancialChangeController(ILogger<FinancialChangeController> logger, IFinancialChangeService fcService,ICategoryService categoryService ,IMachineLearning ml)
+        public FinancialChangeController(ILogger<FinancialChangeController> logger, IFinancialChangeService fcService, ICategoryService categoryService, IMachineLearning ml)
         {
             _categoryService = categoryService;
             _machineLearning = ml;
@@ -56,7 +55,7 @@ namespace PracaInzynierska.Api.Controllers
             Guid guid;
             try
             {
-                //guid = Guid.Parse(guidString);
+                guid = Guid.Parse(guidString);
                 var categoryId = await _machineLearning.NaiveBayesPredict(dto);
                 var catName = await _categoryService.GetCategoryNameByIdAsync(categoryId);
                 CategoryDto cd = new CategoryDto()
@@ -85,7 +84,7 @@ namespace PracaInzynierska.Api.Controllers
             {
                 if (await _fcService.SetReduction(reductions.Id1, reductions.Id2)) return Ok();
             }
-            catch(ArgumentException e)
+            catch (ArgumentException e)
             {
                 return BadRequest(e.Message);
             }

@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using PracaInzynierska.Application.Dto;
 using PracaInzynierska.Application.Interfaces;
-using PracaInzynierska.Application.Services;
-using PracaInzynierska.PropertyManager.Controllers;
 
 namespace PracaInzynierska.Api.Controllers
 {
@@ -25,7 +22,7 @@ namespace PracaInzynierska.Api.Controllers
         public async Task<IActionResult> GetListOfCategoriesAsync()
         {
             var categories = await _categoryService.GetAllCategoriesAsync();
-            if(categories != null)
+            if (categories != null)
             {
                 return Ok(categories);
             }

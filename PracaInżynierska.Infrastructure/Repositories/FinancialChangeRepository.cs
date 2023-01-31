@@ -1,11 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PracaInzynierska.Domain.IRepositories;
 using PracaInzynierska.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PracaInzynierska.Infrastructure.Repositories
 {
@@ -17,7 +12,7 @@ namespace PracaInzynierska.Infrastructure.Repositories
 
         public async Task<List<FinancialChange>> FindForGuid(Guid guid, DateTime startDate, DateTime endDate)
         {
-            return await _dbContext.FinancialChange.Where(x => x.Owner.AutoLoginGUID == guid.ToString() && x.CreationDate.Date>=startDate && x.CreationDate.Date<=endDate).Include(fc => fc.Category).Include(fc => fc.AssetType).ToListAsync();
+            return await _dbContext.FinancialChange.Where(x => x.Owner.AutoLoginGUID == guid.ToString() && x.CreationDate.Date >= startDate && x.CreationDate.Date <= endDate).Include(fc => fc.Category).Include(fc => fc.AssetType).ToListAsync();
         }
         public async Task<List<FinancialChange>> FindAllAsync()
         {

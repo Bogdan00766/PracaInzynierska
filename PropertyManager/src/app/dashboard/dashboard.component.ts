@@ -139,7 +139,6 @@ export class DashboardComponent implements OnInit {
    
   public barChartOptions: ChartConfiguration['options'] = {
     responsive: false,
-    // We use these empty structures as placeholders for dynamic theming.
     scales: {
       x: {},
       y: {
@@ -189,7 +188,7 @@ export class DashboardComponent implements OnInit {
         if (current.categoryName == cat && current.value < 0)
           tmp = tmp + current.value;
       })
-      data.push(tmp/* / sum * 100*/);
+      data.push(tmp);
     });
 
     return data;
@@ -207,7 +206,7 @@ export class DashboardComponent implements OnInit {
         if (current.categoryName == cat && current.value > 0)
           tmp = tmp + current.value;
       })
-      data.push(tmp/* / sum * 100*/);
+      data.push(tmp);
     });
 
     return data;
@@ -216,7 +215,6 @@ export class DashboardComponent implements OnInit {
 
   calculateBalance() {
     var sum = this.fcList.reduce((accummulator, current) => {
-      //if (current.reductionId != null) return accummulator;
       return accummulator + current.value;
     }, 0);
     this.balance = Math.round(sum * 100) / 100;

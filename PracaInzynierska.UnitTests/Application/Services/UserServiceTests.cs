@@ -5,12 +5,8 @@ using PracaInzynierska.Application.Dto;
 using PracaInzynierska.Application.Services;
 using PracaInzynierska.Domain.IRepositories;
 using PracaInzynierska.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace PracaInzynierska.UnitTests.Application.Services
 {
@@ -51,7 +47,7 @@ namespace PracaInzynierska.UnitTests.Application.Services
             }
 
             var mockMapper = new Mock<IMapper>();
-            
+
             var mockUserRepository = new Mock<IUserRepository>();
             mockUserRepository.Setup(x => x.CheckPassword(email, hash)).Returns(false);
 

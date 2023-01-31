@@ -1,11 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using PracaInzynierska.Domain.IRepositories;
+﻿using PracaInzynierska.Domain.IRepositories;
 using PracaInzynierska.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PracaInzynierska.Infrastructure.Repositories
 {

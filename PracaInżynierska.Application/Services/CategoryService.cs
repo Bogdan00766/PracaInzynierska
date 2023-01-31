@@ -3,11 +3,6 @@ using PracaInzynierska.Application.Dto;
 using PracaInzynierska.Application.Interfaces;
 using PracaInzynierska.Domain.IRepositories;
 using PracaInzynierska.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PracaInzynierska.Application.Services
 {
@@ -24,7 +19,7 @@ namespace PracaInzynierska.Application.Services
 
         public Category AddCategory(string name)
         {
-            Category category = new Category{ Name = name, };
+            Category category = new Category { Name = name, };
             var cat = _categoryRepository.Create(category);
             if (cat == null) return new Category { Name = "AlreadyExist" };
             return cat;

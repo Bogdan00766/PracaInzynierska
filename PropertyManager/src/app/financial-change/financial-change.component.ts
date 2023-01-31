@@ -30,7 +30,6 @@ export class FinancialChangeComponent implements OnInit {
   constructor(http: HttpClient, router: Router) {
     this.http = http;
     this.router = router;
-    //this.fchanges[1].creationDate.year
   }
 
   ngOnInit(): void {
@@ -105,8 +104,6 @@ export class FinancialChangeComponent implements OnInit {
   }
   onDeleteReductionBtnClick() {
     let httpParams = new HttpParams().set('id2', this.reductionId2).set('id1', this.reductionId1);
-    //httpParams.append('id1', this.reductionId1);
-    //httpParams.set('id2', this.reductionId2);
     let options = { params: httpParams };
     console.log(options);
     this.http.get('/api/financialchanges/reductions', options).subscribe(
