@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace PracaInzynierska.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class SQLLITE : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -14,9 +15,9 @@ namespace PracaInzynierska.Infrastructure.Migrations
                 name: "AssetType",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -27,9 +28,9 @@ namespace PracaInzynierska.Infrastructure.Migrations
                 name: "Category",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -40,13 +41,13 @@ namespace PracaInzynierska.Infrastructure.Migrations
                 name: "User",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    EMail = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Password = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
-                    AutoLoginGUID = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AutoLoginGUIDExpires = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    EMail = table.Column<string>(type: "TEXT", nullable: false),
+                    Password = table.Column<byte[]>(type: "BLOB", nullable: false),
+                    AutoLoginGUID = table.Column<string>(type: "TEXT", nullable: true),
+                    AutoLoginGUIDExpires = table.Column<DateTime>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -54,42 +55,20 @@ namespace PracaInzynierska.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Transfer",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SentFrom = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SentTo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AccountNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Transfer", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Transfer_User_UserId",
-                        column: x => x.UserId,
-                        principalTable: "User",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "FinancialChange",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Value = table.Column<float>(type: "real", nullable: false),
-                    TransferId = table.Column<int>(type: "int", nullable: true),
-                    SentFrom = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SentTo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CategoryId = table.Column<int>(type: "int", nullable: false),
-                    AssetTypeId = table.Column<int>(type: "int", nullable: false),
-                    OwnerId = table.Column<int>(type: "int", nullable: false),
-                    ReductionId = table.Column<int>(type: "int", nullable: true)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Value = table.Column<float>(type: "REAL", nullable: false),
+                    SentFrom = table.Column<string>(type: "TEXT", nullable: false),
+                    SentTo = table.Column<string>(type: "TEXT", nullable: false),
+                    CategoryId = table.Column<int>(type: "INTEGER", nullable: false),
+                    AssetTypeId = table.Column<int>(type: "INTEGER", nullable: false),
+                    CreationDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    OwnerId = table.Column<int>(type: "INTEGER", nullable: false),
+                    ReductionId = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -110,11 +89,6 @@ namespace PracaInzynierska.Infrastructure.Migrations
                         name: "FK_FinancialChange_FinancialChange_ReductionId",
                         column: x => x.ReductionId,
                         principalTable: "FinancialChange",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_FinancialChange_Transfer_TransferId",
-                        column: x => x.TransferId,
-                        principalTable: "Transfer",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_FinancialChange_User_OwnerId",
@@ -145,16 +119,6 @@ namespace PracaInzynierska.Infrastructure.Migrations
                 column: "ReductionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_FinancialChange_TransferId",
-                table: "FinancialChange",
-                column: "TransferId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Transfer_UserId",
-                table: "Transfer",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_User_EMail",
                 table: "User",
                 column: "EMail",
@@ -172,9 +136,6 @@ namespace PracaInzynierska.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "Category");
-
-            migrationBuilder.DropTable(
-                name: "Transfer");
 
             migrationBuilder.DropTable(
                 name: "User");
